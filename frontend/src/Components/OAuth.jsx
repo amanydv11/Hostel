@@ -1,8 +1,9 @@
-import { Button } from "flowbite-react";
+
 import React from "react";
 import { AiFillGoogleCircle } from "react-icons/ai";
+import { FaGoogle } from 'react-icons/fa'
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import { app } from "../firebase";
+import {app} from "../firebase";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signInSuccess } from "../redux/user/userSlice";
@@ -34,12 +35,13 @@ const OAuth = () => {
     }
   };
   return (
+    
     <button
       type="button"
       onClick={handleGoogleClick}
-      className="w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2"
+      className="w-full cursor-pointer gap-8 flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2"
     >
-      <AiFillGoogleCircle />
+      <FaGoogle/>
       <span>Continue with Google</span>
     </button>
 

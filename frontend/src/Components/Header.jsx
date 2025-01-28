@@ -3,17 +3,19 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { useSelector, useDispatch } from "react-redux";
 import mylogo from "../assets/mylogo.png";
 import LanguageIcon from "@mui/icons-material/Language";
-import { Link,Button } from "@mui/material";
+import { Link} from "@mui/material";
 import Login from '../Pages/Login'
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { FaBars, FaIcons, FaMoon, FaSun, FaUser, FaUserCircle } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { FaBars, FaCross, FaIcons, FaMoon, FaSun, FaUser, FaUserCircle } from "react-icons/fa";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
+import PhoneLogin from "./PhoneLogin";
 
 const Header = () => {
   const [open ,setOpen] =useState(false);
@@ -23,17 +25,16 @@ const Header = () => {
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-const [dropdownMenu, setDropdownMenu] = useState(false);
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
   return (
-    <div className="flex border-gray-300 border-b-2 justify-between items-center px-4">
+    <div className="flex  bg-white border-gray-300 border-b-2 justify-between items-center px-4">
       <div className="">
-        <Link to="/">
+        <a href="/">
           <img src={mylogo} alt="" className="h-20 cursor-pointer w-40 p-2" />
-        </Link>
+        </a>
       </div>
       <div className="flex justify-center items-center">
         <Paper
@@ -84,20 +85,21 @@ const [dropdownMenu, setDropdownMenu] = useState(false);
         <div className="py-1">
         
             <MenuItem>
-              <button
-              onClick={handleOpen}
-                className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+              <a
+              href="/login"
+                className=" cursor-pointer block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
               >
-                Login
-              </button>
+               Login
+              
+              </a>
             </MenuItem>
             <MenuItem>
-            <button
-                onClick={handleOpen}
-                className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+            <a
+            href="/signup"
+                className="cursor-pointer block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
               >
-                Signin
-              </button>
+                Signup
+              </a>
             </MenuItem>
             <Divider />
           <MenuItem>
@@ -122,6 +124,7 @@ const [dropdownMenu, setDropdownMenu] = useState(false);
         </Menu>
         
       </div>
+      {/*
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -132,56 +135,25 @@ const [dropdownMenu, setDropdownMenu] = useState(false);
             width: 600,
             bgcolor: "background.paper",
             boxShadow:"24",
-            p: 4,
+            p:2,
             borderRadius: "10px",
           }}
-        >
-          <Login /> 
+        ><div className="">
+          <button className="cursor-pointer" onClick={handleClose} ><RxCross2/></button>
+          <p className="flex items-center justify-center font-serif text-xl mb-4">Login or Signin</p>
+        </div>
+        <Divider/>
+          <Login/>
         </Box>
       </Modal>
-{/*{dropdownMenu && (
-    <div className="absolute w-72 top-20 right-10 bg-white shadow-lg rounded-lg p-8 z-60">
-    <ul className="space-y-3">
-        <li >
-            <button onClick={handleOpen} className="cursor-pointer mb-2 hover:bg-gray-100 rounded px-4  w-full text-left">Login</button>
-            <button className="cursor-pointer hover:bg-gray-100 rounded px-4  w-full text-left">Sigin</button>
-            <Modal open={open} onClose={handleClose}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 600,
-            bgcolor: "background.paper",
-            boxShadow:"24",
-            p: 4,
-            borderRadius: "10px",
-          }}
-        >
-          <Login /> 
-        </Box>
-      </Modal>
-        </li>
-        <Divider />
-        <li>
-            <button className="cursor-pointer hover:bg-gray-100 rounded px-4 py-2 w-full text-left">List your Property</button>
-        </li>
-        <li>
-            <button className="cursor-pointer hover:bg-gray-100 rounded px-4 py-1 w-full text-left">Help Center</button>
-        </li>
-       
-    </ul>
-    </div>
-)}
-    */}
-
+      */}
+      
       <div className="md:hidden flex items-center">
         <button
           onClick={toggleDropdown}
           className="hover:bg-gray-100 bg-white flex gap-2  border-gray-300 p-2"
         >
-          <FaUserCircle className="mt-1 h-10 w-10" />
+          <FaUserCircle className=" cursor-pointer mt-1 h-10 w-10" />
         </button>
       </div>
       {dropdownOpen && (

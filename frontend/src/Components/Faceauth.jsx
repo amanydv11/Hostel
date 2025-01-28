@@ -1,4 +1,4 @@
-import { AiFillFacebook } from "react-icons/ai";
+import {  FaFacebook } from 'react-icons/fa'
 import { FacebookAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../firebase";
 import { useDispatch } from "react-redux";
@@ -38,8 +38,8 @@ const Faceauth = () => {
 
   return (
 
-    <button type="button" onClick={handleFacebookClick} className="w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
-                        <AiFillFacebook />
+    <button type="button" onClick={handleFacebookClick} className="w-full gap-8 cursor-pointer flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
+                       <FaFacebook/>
                         <span>Continue with Facebook</span>
                     </button>
     

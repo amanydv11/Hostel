@@ -1,37 +1,31 @@
 import React, { useState } from 'react'
-import { FaApple, FaFacebook, FaGoogle } from 'react-icons/fa'
-import { MdMailOutline } from "react-icons/md";
-import PhoneLogin from '../Components/PhoneLogin';
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { RxCross2 } from "react-icons/rx";
-import EmailLogin from '../Components/EmailLogin';
-import OAuth from '../Components/OAuth';
-import Faceauth from '../Components/Faceauth';
-const Login = () => {
+import { FaApple, FaFacebook, FaGoogle } from 'react-icons/fa'
+import { IoMdPhonePortrait } from "react-icons/io";
+import Login from '../Pages/Login';
+import OAuth from './OAuth';
+import Faceauth from './Faceauth';
+const EmailLogin = () => {
     const [open ,setOpen] =useState(false);
       const handleOpen =()=> setOpen(true)
       const handleClose =()=> setOpen(false)
-      const handleClick=()=>{
-        setOpen(true);
-        setOpen(false)
-      }
   return (
-    <div className='flex w-full justify-center'>
-      <div className="bg-white  p-10 rounded-lg shadow-lg max-w-lg m-11 w-full">
+    <div>
+      <div className='flex w-full  justify-center'>
+        
+      <div className="bg-white p-6 max-w-lg m-11 rounded-lg shadow-lg  w-full">
                     <h1 className="text-2xl font-semibold mb-4">Welcome to MyHostel</h1>
-                    <div>
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
-                            Country/Region
-                        </label>
-                        <div>
-                        <PhoneLogin/>
-                    </div>
-                  
-                        </div>
-                        
-                    
+                        <form className='w-full'>
+                        <input className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="email" label='Email' placeholder='Email' />
+                        <input className='w-full py-2 px-1 border rounded border-gray-300' type="password" placeholder='**********' />
+                        <p className="text-xs text-gray-500 mb-4">
+    We’ll call or text you to confirm your number. Standard message and data rates apply. <a href="#" className="text-black font-bold underline gap-1">Privacy Policy</a>
+</p>
+<button type='submit' className=" cursor-pointer w-full bg-pink-600 text-white py-3 rounded-lg font-semibold mb-4">Continue</button>
+                    </form>
                     <div className="flex items-center justify-center mb-4">
                         <hr className="w-full border-gray-300" />
                         <span className="px-2 text-gray-500">or</span>
@@ -44,15 +38,16 @@ const Login = () => {
                                                 Continue with Apple
                                                 </div>
                     </button>
-                    <a href='/emaillogin' className=" cursor-pointer w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
+                    <a href='/login' className=" cursor-pointer w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
                        <div className="flex gap-11">
-                                               <MdMailOutline className='mt-[5px]'/>
-                                               Continue with email
+                                               <IoMdPhonePortrait className='mt-[5px]'/>
+                                               Continue with Phone
                                                </div>
                     </a>
                     <Faceauth/>
                 </div>
-                <Modal open={open} onClose={handleClose}>
+    </div>
+    <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
             position: "absolute",
@@ -70,11 +65,11 @@ const Login = () => {
           <p className="flex items-center justify-center font-serif text-xl mb-4">Login or Signin</p>
         </div>
         <Divider/>
-          <EmailLogin/>
+          <Login/>
         </Box>
       </Modal>
     </div>
   )
 }
 
-export default Login
+export default EmailLogin
