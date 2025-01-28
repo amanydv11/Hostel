@@ -88,7 +88,7 @@ const Footer = () => {
 export default Footer
 */
 import React from 'react'
-import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebook,FaInstagram, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <div>
@@ -115,7 +115,6 @@ const Footer = () => {
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Hosting resources</a></li>
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Community forum</a></li>
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Hosting responsibly</a></li>
-                                    <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Join a free Hosting class</a></li>
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Find a co-host</a></li>
                                 </ul>
                             </div>
