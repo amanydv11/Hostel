@@ -2,8 +2,10 @@ import React from 'react'
 import Button from '@mui/material/Button';
 const Home = () => {
   return (
-    <div>
-      <Button variant="contained">Hello world</Button>
+    <div className='mt-'>
+      <div className="">
+        <Button>hey</Button>
+      </div>
     </div>
   )
 }
