@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Help = () => {
+const Userwishlist = () => {
   return (
     <div>
-      help
+      
     </div>
   )
 }
-export default Help
+
+export default Userwishlist

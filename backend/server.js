@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import authRoutes from './routes/authRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 dotenv.config();
 mongoose
 .connect(
@@ -20,6 +21,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000
 
 app.use('/api/auth',authRoutes)
+app.use('/api/user',userRoutes)
 
 
 

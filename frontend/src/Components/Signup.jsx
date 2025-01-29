@@ -18,6 +18,7 @@ const Signup = () => {
     const[errorMessage,setErrorMessage] =useState(null)
     const[loading,setLoading] = useState(false)
     const navigate= useNavigate();
+    const dispatch= useDispatch()
     const handleChange =(e)=>{
         setFormData({...formData,[e.target.id]: e.target.value.trim() })
     }
@@ -40,6 +41,7 @@ const handleSubmit= async (e)=>{
         }
         setLoading(false);
         if(res.ok){
+          dispatch(signInSuccess(data))
             navigate('/')
         }
     } catch (error) {

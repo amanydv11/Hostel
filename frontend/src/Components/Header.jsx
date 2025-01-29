@@ -54,6 +54,7 @@ const Header = () => {
               }
               else{
         dispatch(signoutSuccess());
+        navigate('/login')
               }
             } catch (error) {
               console.log(error.message)
@@ -71,7 +72,7 @@ const Header = () => {
   return (
     <div className="flex  bg-white border-gray-300 border-b-2 justify-between items-center px-4">
       <div className="">
-        <Link href="/">
+        <Link to="/">
           <img src={mylogo} alt="" className="h-20 cursor-pointer w-40 p-2" />
         </Link>
       </div>
@@ -119,44 +120,46 @@ const Header = () => {
   currentUser? (
     <Menu as='div' className="relative inline-block text-left">
     <div className="">
-    <MenuButton  className="hover:bg-gray-100 m-3 cursor-pointer bg-white flex gap-2 border border-gray-300 rounded-full p-2">
-      <FaBars className="mt-1" />
-      <Avatar alt="user" img={currentUser.profilePicture} rounded/>
+    <MenuButton  className="hover:bg-gray-100 m-2 cursor-pointer bg-white flex gap-2 border border-gray-300 rounded-full p-2">
+      <FaBars className="mt-1 h-4" />
+      <Avatar alt="user" sx={{height:"25px",width:"25px"
+      }} src={currentUser.profilePicture}  />
     </MenuButton>
     </div>
     <MenuItems transition className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
     <div className="py-1">
     <MenuItem>
     <Link to='/userprofile' >
-    <button className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+    <button className="cursor-pointer hover:bg-gray-100 w-full text-left block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Profile
         </button>
       </Link>
       </MenuItem>
     <MenuItem>
       <Link to='/messages' >
-      <button className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+      <button className=" w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
 Messages
       </button>
       </Link>
       </MenuItem>
       <MenuItem>
       <Link to='/notification' >
-      <button className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+      <button className="w-full text-left hover:bg-gray-100  cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Notifications
       </button>
       </Link>
       </MenuItem>
+      <Divider/>
       <MenuItem>
       <Link to='/wishlist' >
-      <button className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+      <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Wishlists
       </button>
       </Link>
       </MenuItem>
       <MenuItem>
       <Link>
-      <button className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+      <button className=" cursor-pointer w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Account
       </button>
       </Link>
@@ -164,7 +167,7 @@ Messages
       <MenuItem>
       <Link to='/listyourproperty' >
       <button
-          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+          className=" cursor-pointer w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
         >
           Manage listings
         </button>
@@ -175,18 +178,16 @@ Messages
       <MenuItem>
       <Link to='/help' >
       <button
-          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+          className="cursor-pointer block w-full hover:bg-gray-100 px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
         >
           Help center
         </button>
       </Link>
       </MenuItem> 
       <MenuItem>
-      <Link to='/signout'>
       <button onClick={handleSignout} className=" cursor-pointer block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Log out
       </button>
-      </Link>
       </MenuItem>
     </div>
   </MenuItems>
