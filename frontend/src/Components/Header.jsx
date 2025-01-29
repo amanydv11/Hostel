@@ -109,9 +109,19 @@ const Header = () => {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex items-center justify-end space-x-4">
-        <button className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2">
+        {
+          currentUser?(
+<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2">
+          Manage Listing
+        </button>
+          ):(
+<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2">
           List your property
         </button>
+          )
+        }
+        
+        
         <button className="cursor-pointer hover:bg-gray-100 rounded-full p-2">
           <LanguageIcon />
         </button>

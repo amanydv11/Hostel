@@ -12,7 +12,7 @@ import Useraccount from './Components/Useraccount'
 import Userwishlist from './Components/Userwishlist'
 import Userprofile from './Components/Userprofile'
 import Help from './Pages/Help'
-
+import YourHostel from './Pages/YourHostel'
 const App = () => {
   return (
     <>
@@ -29,6 +29,7 @@ const App = () => {
      <Route path='/wishlist' element={<Userwishlist/>}/>
      <Route path='/profile' element={<Userprofile/>}/>
      <Route path='/help' element={<Help/>}/>
+     <Route path='/host/hostel' element={<YourHostel/>}/>
      </Routes>
      <Footer/>
      </BrowserRouter> 
