@@ -13,6 +13,14 @@ import Userwishlist from './Components/Userwishlist'
 import Userprofile from './Components/Userprofile'
 import Help from './Pages/Help'
 import YourHostel from './Pages/YourHostel'
+import AccountDelete from './Pages/AccountDelete'
+import Personal from './Pages/Personal'
+import AccountNotification from './Pages/AccountNotification'
+import Security from './Pages/Security'
+import Payments from './Pages/Payments'
+import Privacy from './Pages/Privacy'
+import Refferal from './Pages/Refferal'
+import Taxes from './Pages/Taxes'
 const App = () => {
   return (
     <>
@@ -30,6 +38,14 @@ const App = () => {
      <Route path='/guest/profile' element={<Userprofile/>}/>
      <Route path='/help' element={<Help/>}/>
      <Route path='/host/hostel' element={<YourHostel/>}/>
+     <Route path='/account-delete/reason' element={<AccountDelete/>}/>
+     <Route path='/account-setting/payments-payouts' element={<Payments/>}/>
+     <Route path='/account-setting/privacy' element={<Privacy/>}/>
+     <Route path='/account-setting/personal-info' element={<Personal/>}/>
+     <Route path='/account-setting/invite' element={<Refferal/>}/>
+     <Route path='/account-setting/tax' element={<Taxes/>}/>
+     <Route path='/account-setting/security' element={<Security/>}/>
+     <Route path='/account-setting/notification' element={<AccountNotification/>}/>
      </Routes>
      <Footer/>
      </BrowserRouter> 

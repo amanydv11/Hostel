@@ -89,19 +89,15 @@ const UserMessages = () => {
           </Link>
             
         </div>
-        <div className="">
-        {inbox_type ==='/' && <AllMessage/>}
+        <div className="flex flex-col items-center justify-center text-center">
+      {inbox_type ==='/' && <AllMessage/>}
       {inbox_type ==='hosting'&& <HostMessage/>}
       {inbox_type ==='travelling'&& <TravelMessage/>}
       {inbox_type ==='support' && <SupportMessage/>}
       {inbox_type ==='unread' && <UnreadMessage/>}
     
         </div>
-        <div className="flex flex-col items-center justify-center text-center">
-            <TiMessages className='h-10 w-10'/>
-            <p className="text-lg font-semibold">You don’t have any messages</p>
-            <p className="text-gray-500">When you receive a new message, it will appear here.</p>
-        </div>
+        
     </div>
     <div className="w-3/4">
         {/* Right side content */}
