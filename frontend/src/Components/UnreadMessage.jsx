@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserMessages = () => {
+const UnreadMessage = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const UserMessages = () => {
   )
 }
 
-export default UserMessages
+export default UnreadMessage

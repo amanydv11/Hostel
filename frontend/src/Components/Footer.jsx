@@ -95,11 +95,11 @@ const Footer = () => {
       
       <footer className="bg-white py-5 border-t-2 border-gray-300">
                     <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 font-thin  md:grid-cols-3 gap-8">
                             <div>
                                 <h3 className="text-sm font-semibold text-gray-900">Support</h3>
-                                <ul className="mt-4 space-y-2">
-                                    <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Help Centre</a></li>
+                                <ul className="mt-4  space-y-2">
+                                    <li><a href="/help" className="text-sm text-gray-600 hover:text-gray-900">Help Centre</a></li>
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">MyCover</a></li>
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Anti-discrimination</a></li>
                                     <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900">Disability support</a></li>

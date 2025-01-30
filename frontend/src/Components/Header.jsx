@@ -111,11 +111,11 @@ const Header = () => {
       <div className="hidden md:flex items-center justify-end space-x-4">
         {
           currentUser?(
-<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2">
+<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full px-4 py-2">
           Manage Listing
         </button>
           ):(
-<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2">
+<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full px-4 py-2">
           List your property
         </button>
           )
@@ -136,25 +136,25 @@ const Header = () => {
       }} src={currentUser.profilePicture}  />
     </MenuButton>
     </div>
-    <MenuItems transition className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+    <MenuItems transition className="absolute font-thin  right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
     <div className="py-1">
     <MenuItem>
-    <Link to='/userprofile' >
-    <button className="cursor-pointer hover:bg-gray-100 w-full text-left block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+    <Link to='/guest/userprofile'>
+    <button className="cursor-pointer font-semibold hover:bg-gray-100 w-full text-left block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Profile
         </button>
       </Link>
       </MenuItem>
     <MenuItem>
-      <Link to='/messages' >
-      <button className=" w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+      <Link to='/guest/messages' >
+      <button className=" w-full font-semibold text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
 Messages
       </button>
       </Link>
       </MenuItem>
       <MenuItem>
       <Link to='/notification' >
-      <button className="w-full text-left hover:bg-gray-100  cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
+      <button className="w-full font-semibold text-left hover:bg-gray-100  cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Notifications
       </button>
       </Link>
@@ -168,7 +168,7 @@ Messages
       </Link>
       </MenuItem>
       <MenuItem>
-      <Link>
+      <Link to='/account-setting' >
       <button className=" cursor-pointer w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden" >
         Account
       </button>
