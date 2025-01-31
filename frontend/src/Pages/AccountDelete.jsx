@@ -35,7 +35,7 @@ const AccountDelete = () => {
         <div className='max-w-4xl h-screen justify-center items-center flex flex-col mx-auto p-4'>
         <p className="text-3xl font-semibold mb-2">What prompted you to deactivate ?</p>
         <form onSubmit={handleSubmit}>
-          <div className="flex text-lg  p-5 flex-col gap-1 space-y-10">
+          <div className="flex text-lg  p-5 flex-col gap-2 space-y-6">
             <label className="flex items-center space-x-3">
               <input
                 type="radio"
@@ -47,7 +47,7 @@ const AccountDelete = () => {
               />
               <span>I have safety or privacy concern</span>
             </label>
-  
+  <Divider/>
             <label className="flex items-center space-x-3">
               <input
                 type="radio"
@@ -59,7 +59,7 @@ const AccountDelete = () => {
               />
               <span>I can't host anymore</span>
             </label>
-  
+  <Divider/>
             <label className="flex items-center space-x-3">
               <input
                 type="radio"
@@ -71,6 +71,7 @@ const AccountDelete = () => {
               />
               <span>I can't comply with MyHostel Terms of Service / Community commitment.</span>
             </label>
+            <Divider/>
             <label className="flex items-center space-x-3">
               <input
                 type="radio"
