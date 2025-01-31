@@ -37,7 +37,7 @@ const App = () => {
      <Route path='/notification' element={<Notification/>}/>
      <Route path='/account-setting' element={<Useraccount/>}/>
      <Route path='/wishlist' element={<Userwishlist/>}/>
-     <Route path='/guest/profile' element={<Userprofile/>}/>
+     <Route path='/guest/userprofile' element={<Userprofile/>}/>
      <Route path='/help' element={<Help/>}/>
      <Route path='/host/hostel' element={<YourHostel/>}/>
      <Route path='/account-delete/reason' element={<AccountDelete/>}/>

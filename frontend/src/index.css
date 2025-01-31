@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
 @import "tailwindcss";
   body{
-    background-color:#FDFFF5;
+    background-color:#FDFCFA;
     height: 100vh;
   }
   .prata-regular {
