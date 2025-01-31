@@ -21,6 +21,8 @@ import Payments from './Pages/Payments'
 import Privacy from './Pages/Privacy'
 import Refferal from './Pages/Refferal'
 import Taxes from './Pages/Taxes'
+import Accountdelconfrm from './Pages/Accountdelconfrm'
+import Accdelcomplete from './Pages/Accdelcomplete'
 const App = () => {
   return (
     <>
@@ -39,6 +41,8 @@ const App = () => {
      <Route path='/help' element={<Help/>}/>
      <Route path='/host/hostel' element={<YourHostel/>}/>
      <Route path='/account-delete/reason' element={<AccountDelete/>}/>
+     <Route path='/account-delete/confirm' element={<Accountdelconfrm/>}/>
+     <Route path='/account-delete/complete' element={<Accdelcomplete/>}/>
      <Route path='/account-setting/payments-payouts' element={<Payments/>}/>
      <Route path='/account-setting/privacy' element={<Privacy/>}/>
      <Route path='/account-setting/personal-info' element={<Personal/>}/>
@@ -46,6 +50,7 @@ const App = () => {
      <Route path='/account-setting/tax' element={<Taxes/>}/>
      <Route path='/account-setting/security' element={<Security/>}/>
      <Route path='/account-setting/notification' element={<AccountNotification/>}/>
+
      </Routes>
      <Footer/>
      </BrowserRouter> 
