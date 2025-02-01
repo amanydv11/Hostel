@@ -36,7 +36,7 @@ const Useraccount = () => {
     
 </div>
 </Link>
-<Link to='/account-setting/payments-payouts'>
+<Link to='/account-setting/payments'>
 <div className="bg-white p-4 rounded-lg shadow-md items-start space-x-4">
     <MdOutlinePayments className='h-8 w-8'/>
     <div className='mt-5'>
