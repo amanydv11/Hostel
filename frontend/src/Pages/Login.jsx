@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { FaApple, FaFacebook, FaGoogle } from 'react-icons/fa'
 import { MdMailOutline } from "react-icons/md";
-import PhoneLogin from '../Components/PhoneLogin';
+import PhoneLogin from '../Components/auth/PhoneLogin';
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { RxCross2 } from "react-icons/rx";
-import EmailLogin from '../Components/EmailLogin';
-import OAuth from '../Components/OAuth';
-import Faceauth from '../Components/Faceauth';
+import EmailLogin from '../Components/auth/EmailLogin';
+import OAuth from '../Components/auth/OAuth';
+import Faceauth from '../Components/auth/Faceauth';
 const Login = () => {
     const [open ,setOpen] =useState(false);
       const handleOpen =()=> setOpen(true)

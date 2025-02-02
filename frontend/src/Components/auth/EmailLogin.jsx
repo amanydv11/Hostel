@@ -6,12 +6,13 @@ import { RxCross2 } from "react-icons/rx";
 import { Link,useNavigate } from 'react-router-dom';
 import { FaApple, FaSpinner} from 'react-icons/fa'
 import { IoMdPhonePortrait } from "react-icons/io";
-import Login from '../Pages/Login';
+import Login from '../../Pages/Login';
 import OAuth from './OAuth';
 import Faceauth from './Faceauth';
 import { Alert } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart,signInFailure,signInSuccess } from "../redux/user/userSlice";
+import { signInStart,signInFailure,signInSuccess } from "../../redux/user/userSlice";
+import ForgotPassword from './ForgotPassword';
 const EmailLogin = () => {
   const[formData,setFormData] = useState({})
   const {loading,error:errorMessage} =useSelector(state=> state.user);
@@ -79,8 +80,8 @@ const handleSubmit= async (e)=>{
         Sign Up</Link>
         </div>
         <div className="flex gap-2 text-sm mt-2">
-        <Link to='/forgot_pass' className="text-blue-500">
-        Forgot Password</Link>
+        <button onClick={handleOpen} to='/forgot_pass' className="text-blue-500 underline cursor-pointer ">
+        Forgot Password</button>
         </div>
         </div>
                     <div className="flex items-center justify-center mb-4">
@@ -120,18 +121,16 @@ const handleSubmit= async (e)=>{
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 600,
-            bgcolor: "background.paper",
-            boxShadow:"24",
+            width: 400,
+            bgcolor: "white",
+            boxShadow:"4",
             p:2,
             borderRadius: "10px",
           }}
-        ><div className="">
+        ><div className="flex justify-end">
           <button className="cursor-pointer" onClick={handleClose} ><RxCross2/></button>
-          <p className="flex items-center justify-center font-serif text-xl mb-4">Login or Signin</p>
-        </div>
-        <Divider/>
-          <Login/>
+          </div>
+          <ForgotPassword/>
         </Box>
       </Modal>
     </div>

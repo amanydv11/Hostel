@@ -3,10 +3,10 @@ import React from "react";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaGoogle } from 'react-icons/fa'
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import {app} from "../firebase";
+import {app} from "../../firebase";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signInSuccess } from "../redux/user/userSlice";
+import { signInSuccess } from "../../redux/user/userSlice";
 const OAuth = () => {
   const auth = getAuth(app);
   const dispatch = useDispatch();

@@ -7,12 +7,13 @@ import { RxCross2 } from "react-icons/rx";
 import { FaApple, FaFacebook, FaGoogle } from 'react-icons/fa'
 import { IoMdPhonePortrait } from "react-icons/io";
 import { Link,useNavigate } from 'react-router-dom';
-import Login from '../Pages/Login';
-import OAuth from './OAuth';
+import Login from '../../Pages/Login';
+import OAuth from '../../Components/auth/OAuth';
 import Faceauth from './Faceauth';
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart,signInFailure,signInSuccess } from "../redux/user/userSlice";
+import {signInSuccess } from "../../redux/user/userSlice";
 import { Alert } from '@mui/material';
+import ForgotPassword from './ForgotPassword';
 const Signup = () => {
     const[formData,setFormData] = useState({})
     const[errorMessage,setErrorMessage] =useState(null)
@@ -43,6 +44,7 @@ const handleSubmit= async (e)=>{
         if(res.ok){
           dispatch(signInSuccess(data))
             navigate('/')
+            
         }
     } catch (error) {
         setErrorMessage(error.message)
@@ -85,8 +87,8 @@ const handleSubmit= async (e)=>{
         Log In</Link>
         </div>
         <div className="flex gap-2 text-sm mt-2">
-        <Link to='/forgot_pass' className="text-blue-500">
-        Forgot Password</Link>
+        <button onClick={handleOpen} to='/forgot_pass' className="text-blue-500 cursor-pointer underline ">
+        Forgot Password</button>
         </div>
         </div>
                     <div className="flex items-center justify-center mb-4">
@@ -125,18 +127,16 @@ const handleSubmit= async (e)=>{
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 600,
+            width: 400,
             bgcolor: "background.paper",
             boxShadow:"24",
             p:2,
             borderRadius: "10px",
           }}
-        ><div className="">
+        ><div className="flex justify-end">
           <button className="cursor-pointer" onClick={handleClose} ><RxCross2/></button>
-          <p className="flex items-center justify-center font-serif text-xl mb-4">Login or Signin</p>
-        </div>
-        <Divider/>
-          <Login/>
+          </div>
+          <ForgotPassword/>
         </Box>
       </Modal>
     </div>

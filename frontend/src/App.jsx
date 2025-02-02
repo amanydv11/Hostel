@@ -4,8 +4,8 @@ import Login from './Pages/Login'
 import {Routes,Route , BrowserRouter} from 'react-router-dom'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
-import EmailLogin from './Components/EmailLogin'
-import Signup from './Components/Signup'
+import EmailLogin from './Components/auth/EmailLogin'
+import Signup from './Components/auth/Signup'
 import Messages from './Pages/UserMessages'
 import Notification from './Components/Usernotification'
 import Useraccount from './Components/Useraccount'
@@ -23,6 +23,8 @@ import Refferal from './Pages/Refferal'
 import Taxes from './Pages/Taxes'
 import Accountdelconfrm from './Pages/Accountdelconfrm'
 import Notfound from './Pages/Notfound'
+import ForgotPassword from './Components/auth/ForgotPassword'
+import ResetPassword from './Components/auth/ResetPassword'
 const App = () => {
   return (
     <>
@@ -49,7 +51,10 @@ const App = () => {
      <Route path='/account-setting/tax' element={<Taxes/>}/>
      <Route path='/account-setting/security' element={<Security/>}/>
      <Route path='/account-setting/notification' element={<AccountNotification/>}/>
+     <Route path='/forgot_pass' element={<ForgotPassword/>}/>
+     <Route path='/reset/:token' element={<ResetPassword/>}/>
 <Route path='*' element={<Notfound/>}/>
+
      </Routes>
      <Footer/>
      </BrowserRouter> 
