@@ -42,8 +42,7 @@ const handleSubmit= async (e)=>{
         }
         setLoading(false);
         if(res.ok){
-          dispatch(signInSuccess(data))
-            navigate('/')
+            navigate('/emaillogin')
             
         }
     } catch (error) {
@@ -72,8 +71,8 @@ const handleSubmit= async (e)=>{
 {
                   loading ? (
                       <>
-                      <FaSpinner size="sm"/>
-                      <span className="pl-3" >Loading</span>
+                      
+                      <span className="pl-3" >Loading...</span>
                       </>
                   ): 'Continue'
               }

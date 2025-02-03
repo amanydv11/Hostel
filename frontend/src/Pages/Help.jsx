@@ -13,7 +13,7 @@ const Help = () => {
     <div className="min-h-full">
       <div className="flex flex-col items-center p-4">
         <h1 className="text-5xl mb-10 font-semibold">
-          Hi {currentUser.username}, how can we help?
+          Hi {currentUser?.username}, how can we help?
         </h1>
         <div className="relative w-full max-w-md mb-8">
           <input

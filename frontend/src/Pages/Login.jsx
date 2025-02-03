@@ -10,6 +10,7 @@ import EmailLogin from '../Components/auth/EmailLogin';
 import OAuth from '../Components/auth/OAuth';
 import Faceauth from '../Components/auth/Faceauth';
 const Login = () => {
+  const [selectedTab, setSelectedTab] = useState('guest');
     const [open ,setOpen] =useState(false);
       const handleOpen =()=> setOpen(true)
       const handleClose =()=> setOpen(false)
@@ -28,10 +29,7 @@ const Login = () => {
                         <div>
                         <PhoneLogin/>
                     </div>
-                  
                         </div>
-                        
-                    
                     <div className="flex items-center justify-center mb-4">
                         <hr className="w-full border-gray-300" />
                         <span className="px-2 text-gray-500">or</span>

@@ -23,7 +23,7 @@ const Header = () => {
   const handleOpen =()=> setOpen(true)
   const handleClose =()=> setOpen(false)
   const path =useLocation().pathname;
-    const location = useLocation()
+  const location = useLocation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const[searchTerm,setSearchTerm] = useState('')
@@ -70,6 +70,8 @@ const Header = () => {
           }
 
   return (
+    <div className={`${location.pathname.includes("/host")?' invisible':''}`} >
+
     <div className="flex  bg-white border-gray-300 border-b-2 justify-between items-center px-4">
       <div className="">
         <Link to="/">
@@ -111,11 +113,11 @@ const Header = () => {
       <div className="hidden md:flex items-center justify-end space-x-4">
         {
           currentUser?(
-<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full px-4 py-2">
+<button onClick={()=>navigate('/host')} className="cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full px-4 py-2">
           Manage Listing
         </button>
           ):(
-<button onClick={()=>navigate('/host/hostel')} className="cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full px-4 py-2">
+<button onClick={()=>navigate('/host')} className="cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full px-4 py-2">
           List your property
         </button>
           )
@@ -125,6 +127,7 @@ const Header = () => {
         <button className="cursor-pointer hover:bg-gray-100 rounded-full p-2">
           <LanguageIcon />
         </button>
+        
         
 {
   currentUser? (
@@ -324,6 +327,7 @@ Messages
         </div>
       )}
        
+    </div>
     </div>
   );
 };
