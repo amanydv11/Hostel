@@ -9,6 +9,7 @@ import { RxCross2 } from "react-icons/rx";
 import EmailLogin from '../Components/auth/EmailLogin';
 import OAuth from '../Components/auth/OAuth';
 import Faceauth from '../Components/auth/Faceauth';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const [selectedTab, setSelectedTab] = useState('guest');
     const [open ,setOpen] =useState(false);
@@ -42,12 +43,12 @@ const Login = () => {
                                                 Continue with Apple
                                                 </div>
                     </button>
-                    <a href='/emaillogin' className=" cursor-pointer w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
+                    <Link to='/login' className=" cursor-pointer w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
                        <div className="flex gap-11">
                                                <MdMailOutline className='mt-[5px]'/>
                                                Continue with email
                                                </div>
-                    </a>
+                    </Link>
                     <Faceauth/>
                 </div>
                 <Modal open={open} onClose={handleClose}>

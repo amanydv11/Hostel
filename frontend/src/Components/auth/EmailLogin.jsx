@@ -95,7 +95,7 @@ const handleSubmit= async (e)=>{
                                                 Continue with Apple
                                                 </div>
                     </button>
-                    <Link to='/login' >
+                    <Link to='/phone' >
                     <button  className=" cursor-pointer w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
                        <div className="flex gap-11">
                                                <IoMdPhonePortrait className='mt-[5px]'/>

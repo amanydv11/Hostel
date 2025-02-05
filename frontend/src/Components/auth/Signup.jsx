@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { FaSpinner } from 'react-icons/fa';
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -10,47 +9,77 @@ import { Link,useNavigate } from 'react-router-dom';
 import Login from '../../Pages/Login';
 import OAuth from '../../Components/auth/OAuth';
 import Faceauth from './Faceauth';
-import { useDispatch, useSelector } from "react-redux";
-import {signInSuccess } from "../../redux/user/userSlice";
 import { Alert } from '@mui/material';
 import ForgotPassword from './ForgotPassword';
 const Signup = () => {
     const[formData,setFormData] = useState({})
     const[errorMessage,setErrorMessage] =useState(null)
     const[loading,setLoading] = useState(false)
-    const navigate= useNavigate();
-    const dispatch= useDispatch()
+    const [otp, setOtp] = useState('');
+    const [otpSent, setOtpSent] = useState(false);
+    const [openOtpModal, setOpenOtpModal] = useState(false);
+    const navigate= useNavigate()
     const handleChange =(e)=>{
         setFormData({...formData,[e.target.id]: e.target.value.trim() })
     }
-const handleSubmit= async (e)=>{
-    e.preventDefault()
-    if(!formData.username || !formData.email || !formData.password){
-     return setErrorMessage('Please fill all fields')
-    }
-    try {
-        setLoading(true);
-        setErrorMessage(null);
-        const res= await fetch('/api/auth/signup',{
-            method:'POST',
-            headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify(formData) 
-        });
-        const data = await res.json();
-        if(data.success===false){
-            return setErrorMessage(data.message);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!formData.username || !formData.email || !formData.password) {
+            return setErrorMessage('Please fill all fields');
         }
-        setLoading(false);
-        if(res.ok){
-            navigate('/emaillogin')
-            
+
+        try {
+            setLoading(true);
+            setErrorMessage(null);
+            const res = await fetch('/api/auth/send-verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: formData.email }),
+            });
+
+            const data = await res.json();
+            setLoading(false);
+
+            if (!data.success) {
+                return setErrorMessage(data.message);
+            }
+
+            setOtpSent(true);
+            setOpenOtpModal(true);
+        } catch (error) {
+            setErrorMessage(error.message);
+            setLoading(false);
         }
-    } catch (error) {
-        setErrorMessage(error.message)
-        setLoading(false);
-    }
-    
-}
+    };
+    const handleOtpVerification = async () => {
+        if (!otp) return setErrorMessage("Please enter the OTP");
+        try {
+            setLoading(true);
+            const res = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    email: formData.email,
+                otp: String(otp),
+                username: formData.username,  
+                password: formData.password,
+                 }),
+            });
+
+            const data = await res.json();
+            setLoading(false);
+
+            if (!data.success) {
+                return setErrorMessage(data.message);
+            }
+           
+            setOpenOtpModal(false);
+            navigate('/login');
+        } catch (error) {
+            setErrorMessage(error.message);
+            setLoading(false);
+        }
+    };
     const [open ,setOpen] =useState(false);
       const handleOpen =()=> setOpen(true)
       const handleClose =()=> setOpen(false)
@@ -81,8 +110,8 @@ const handleSubmit= async (e)=>{
                     </form>
                     <div className="flex justify-between">
         <div className="flex gap-2 text-sm mt-2">
-        <span>Don't Have an account?</span>
-        <Link to='/emaillogin' className="text-blue-500">
+        <span>Have an account?</span>
+        <Link to='/login' className="text-blue-500">
         Log In</Link>
         </div>
         <div className="flex gap-2 text-sm mt-2">
@@ -102,7 +131,7 @@ const handleSubmit= async (e)=>{
                                                 Continue with Apple
                                                 </div>
                     </button>
-                    <Link to='/login'>
+                    <Link to='/phone'>
                     <button className=" cursor-pointer w-full flex items-center justify-center border border-gray-300 py-3 rounded-lg mb-2">
                        <div className="flex gap-11">
                                                <IoMdPhonePortrait className='mt-[5px]'/>
@@ -119,6 +148,26 @@ const handleSubmit= async (e)=>{
         }
                 </div>
     </div>
+    <Modal open={openOtpModal} onClose={() => setOpenOtpModal(false)}>
+                    <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 400, bgcolor: "background.paper", p: 3, borderRadius: "10px" }}>
+                        <div className="flex justify-end">
+                            <button onClick={() => setOpenOtpModal(false)}><RxCross2 /></button>
+                        </div>
+                        <h2 className="text-lg font-semibold mb-4">Enter OTP</h2>
+                        <input
+                            type="text"
+                            id='otp'
+                            className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
+                            placeholder="Enter OTP"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                        />
+                        <button  onClick={handleOtpVerification} className="w-full bg-red-600 cursor-pointer text-white py-2 rounded-lg font-semibold">
+                            Verify OTP
+                        </button>
+                    </Box>
+                </Modal>
+
     <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
