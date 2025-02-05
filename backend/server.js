@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import { cloudinaryConnect } from './utils/cloudinary.js';
+import fileUpload from 'express-fileupload';
 dotenv.config();
 mongoose
 .connect(
@@ -13,12 +15,19 @@ mongoose
 .then(()=>{
     console.log('db connected')
 });
+cloudinaryConnect()
 const __dirname = path.resolve();
 const app = express()
 app.use(express.json())
 app.use(cookieParser());
 
 const PORT = process.env.PORT || 5000
+app.use(
+    fileUpload({
+        useTempFiles:true,
+        tempFileDir:"/tmp/"
+    }) 
+)
 
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
