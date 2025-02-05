@@ -39,14 +39,14 @@ const App = () => {
      <Route path='/notification' element={<Notification/>}/>
      <Route path='/account-setting' element={<Useraccount/>}/>
      <Route path='/wishlist' element={<Userwishlist/>}/>
-     <Route path='/guest/userprofile' element={<Userprofile/>}/>
+     <Route path='/account-setting/profile' element={<Userprofile/>}/>
      <Route path='/help' element={<Help/>}/>
      <Route path='/host/hostel' element={<YourHostel/>}/>
      <Route path='/account-delete/reason' element={<AccountDelete/>}/>
      <Route path='/account-delete/confirm' element={<Accountdelconfrm/>}/>
      <Route path='/account-setting/payments' element={<Payments/>}/>
      <Route path='/account-setting/privacy' element={<Privacy/>}/>
-     <Route path='/account-setting/personal-info' element={<Personal/>}/>
+     <Route path='/profile' element={<Personal/>}/>
      <Route path='/account-setting/invite' element={<Refferal/>}/>
      <Route path='/account-setting/tax' element={<Taxes/>}/>
      <Route path='/account-setting/security' element={<Security/>}/>

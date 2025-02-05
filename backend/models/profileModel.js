@@ -4,9 +4,8 @@ const profileSchema = new mongoose.Schema({
         type:String,
         true:true
     },
-    lastName:{
+    legalName:{
 type:String,
-trim:true
     },
     gender:{
         type:String

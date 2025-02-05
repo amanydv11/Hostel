@@ -16,7 +16,7 @@ const Useraccount = () => {
     <h1 className="text-4xl font-semibold mb-2">Account</h1>
     <p className="text-lg mb-6">As, <span className="font-semibold">{currentUser?.email}</span> · <Link to='/profile' className='underline' >Go to profile</Link></p>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Link to='/account-setting/personal-info'>
+      <Link to='/account-setting/profile'>
       <div className="bg-white p-4 rounded-lg shadow-md items-start space-x-4">
     <FaIdCard className='h-8 w-8'/>
     <div className='mt-5'>
