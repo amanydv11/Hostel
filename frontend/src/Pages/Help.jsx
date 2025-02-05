@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import HelpGuest from '../Components/HelpGuest';
-import HelpHost from '../Components/HelpHost';
+import HelpHost from '../Components/host/HelpHost';
 
 const Help = () => {
   const { currentUser } = useSelector((state) => state.user);

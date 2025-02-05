@@ -4,7 +4,7 @@ const profileSchema = new mongoose.Schema({
         type:String,
         true:true
     },
-    legalName:{
+    lastName:{
 type:String,
     },
     gender:{
@@ -17,6 +17,10 @@ type:String,
         type:String
     },
     contactNumber:{
+        type:Number,
+        trim:true
+    },
+    emergencyContact:{
         type:Number,
         trim:true
     }

@@ -94,25 +94,25 @@ ${
   )}
   <div className="flex flex-col mt-2">
   <span>Username</span>
-  <input onChange={handleChange} id='first' disabled className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder={currentUser?.username} />
+  <input disabled className='w-full mb-2 py-2 px-1 border rounded border-gray-300' placeholder={currentUser?.username} />
 </div>
 <div className="flex flex-col mt-2">
   <span>First name</span>
-  <input onChange={handleChange} id='first' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
+  <input onChange={handleChange} id='firstName' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
 </div>
         <div className="flex flex-col mt-2">
           <span>Last name </span>
-        <input onChange={handleChange} id='last' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
+        <input onChange={handleChange} id='lastName' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
         </div>
         <div className="flex flex-col mt-2">
           <span>Date of birth</span>
-        <input onChange={handleChange} id='dateofbirth' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="date" />
+        <input onChange={handleChange} id='dateOfBirth' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="date" />
         </div>
         
         <div className="flex flex-col mt-2">
           <span>Phone number</span>
           <PhoneInput
-          id='phone'
+          id='contactNumber'
           onChange={handleChange}
       className='py-1 px-1 border rounded border-gray-300 overflow-auto text-2xl text-gray-600'
   international
@@ -132,12 +132,12 @@ ${
   onChange={handleChange}
       className='py-1 mb-2 px-1 border rounded border-gray-300 overflow-auto text-2xl text-gray-600'
   international
-  id='emergency'
+  id='emergencyContact'
   defaultCountry="IN"
  />
 </div>
 <div className="mt-2 mb-5">
-<GenderCheckBox
+<GenderCheckBox id='gender'
            onCheckboxChange={handleCheckboxChange}
           selectedGender={formData.gender} />
 </div>

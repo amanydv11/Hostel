@@ -11,7 +11,7 @@ export const updateProfile = async(req,res)=>{
             lastName = "",
             dateOfBirth = "",
             contactNumber = "",
-            emergencyNumber="",
+            emergencyContact="",
             gender = "",
             address="",
           } = req.body;
@@ -27,7 +27,7 @@ export const updateProfile = async(req,res)=>{
           profile.dateOfBirth = dateOfBirth;
           profile.address = address;
           profile.contactNumber = contactNumber;
-          profile.emergencyNumber = emergencyNumber;
+          profile.emergencyContact = emergencyContact;
           profile.gender = gender;
           await profile.save();
           const updatedUserDetails = await User.findById(id)

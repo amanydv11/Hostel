@@ -1,5 +1,5 @@
 import React from 'react'
-import HostelCard from './HostelCard'
+import HostelCard from './host/HostelCard'
 import AspectRatio from '@mui/joy/AspectRatio';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';

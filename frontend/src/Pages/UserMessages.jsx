@@ -10,7 +10,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Link,useLocation } from 'react-router-dom';
 import UnreadMessage from '../Components/UnreadMessage';
 import AllMessage from '../Components/AllMessage'
-import HostMessage from '../Components/HostMessage'
+import HostMessage from '../Components/host/HostMessage'
 import TravelMessage from '../Components/TravelMessage'
 import SupportMessage from '../Components/SupportMessage'
 const UserMessages = () => {

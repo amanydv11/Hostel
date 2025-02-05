@@ -2,7 +2,7 @@ import React from 'react';
 import { Divider } from '@mui/material';
 import { FaChevronRight, FaExclamationCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import policy from '../assets/policy.png';
+import policy from '../../assets/policy.png';
 
 const HelpHost = () => {
   return (
