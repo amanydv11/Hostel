@@ -25,6 +25,7 @@ import Accountdelconfrm from './Pages/Accountdelconfrm'
 import Notfound from './Pages/Notfound'
 import ForgotPassword from './Components/auth/ForgotPassword'
 import ResetPassword from './Components/auth/ResetPassword'
+import HostelPostCard from './Components/host/HostelPostCard'
 const App = () => {
   return (
     <>
@@ -54,7 +55,7 @@ const App = () => {
      <Route path='/forgot_pass' element={<ForgotPassword/>}/>
      <Route path='/reset/:token' element={<ResetPassword/>}/>
 <Route path='*' element={<Notfound/>}/>
-
+<Route path='/card' element={<HostelPostCard/>}/>
      </Routes>
      <Footer/>
      </BrowserRouter> 
