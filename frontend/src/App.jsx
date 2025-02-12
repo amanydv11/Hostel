@@ -26,10 +26,12 @@ import Notfound from './Pages/Notfound'
 import ForgotPassword from './Components/auth/ForgotPassword'
 import ResetPassword from './Components/auth/ResetPassword'
 import HostelPostCard from './Components/host/HostelPostCard'
+import ScrollBar from './Components/ScrollBar'
 const App = () => {
   return (
     <>
      <BrowserRouter>
+     <ScrollBar/>
      <Header/>
      <Routes >
      <Route path='/' element={<Home/>}/>

@@ -1,16 +1,33 @@
-import React, { useState } from "react";
-import { Select } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import FacilityProvided from "./FacilityProvided";
 import { Textarea } from "@headlessui/react";
-
+import { Country, State, City } from "country-state-city";
 const HostelPostCard = () => {
   const [formData, setFormData] = useState({});
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
 
+  useEffect(() => {
+    if (selectedCountry) {
+      setStates(State.getStatesOfCountry(selectedCountry));
+      setSelectedState("");
+      setCities([]);
+    }
+  }, [selectedCountry]);
 
-  const handleSubmit=()=>{
-    e,preventDefault()
-  }
+  useEffect(() => {
+    if (selectedState) {
+      setCities(City.getCitiesOfState(selectedCountry, selectedState));
+      setSelectedCity("");
+    }
+  }, [selectedState]);
+  const handleSubmit = () => {
+    e, preventDefault();
+  };
   const handleChange = (event) => {
     const value = event.target.value;
     if (selectedOptions.includes(value)) {
@@ -37,46 +54,103 @@ const HostelPostCard = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="p-3 max-w-3xl mx-auto min-h-screen items-center flex flex-col">
+      <form onSubmit={handleSubmit} className="p-3 max-w-3xl mx-auto">
         <h1 className="text-center text-red-500 text-4xl my-7 font-semibold">
           Enter your property details
         </h1>
         <div className="flex flex-col gap-4">
-          <div className="lex flex-col gap-4 sm:flex-row justify-between">
+          <div className=" gap-4 sm:flex-row ">
             <input
               id="name"
               className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
               type="text"
               placeholder="Enter your property name"
             />
-            <input
-              id="address"
-              className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
-              type="text"
-              placeholder="Enter your property location"
-            />
-            <div className="flex justify-between ">
+            <div className="flex gap-2 ">
+              <input
+                id="address"
+                className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
+                type="text"
+                placeholder="Enter your property location"
+              />
+              <div className="flex items-center">
+                <span>Pincode:</span>
+                <input
+                  id="pincode"
+                  type="number"
+                  className=" mb-2 py-2 w-26 px-1 border rounded border-gray-300"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 justify-between ">
+              <div className="flex flex-col">
+                <span>Select your country</span>
+                <select
+                  id="country"
+                  className="border h-10 mt-1 rounded border-gray-300"
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                  value={selectedCountry}
+                >
+                  <option value="">Select Country</option>
+                  {Country.getAllCountries().map((country) => (
+                    <option key={country.isoCode} value={country.isoCode}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="flex flex-col">
                 <span>Select your State</span>
+                <select
+                  id="state"
+                  className="border h-10 mt-1 rounded border-gray-300"
+                  onChange={(e) => setSelectedState(e.target.value)}
+                  value={selectedState}
+                  disabled={!states.length}
+                >
+                  <option value="">Select State</option>
+                  {states.map((state) => (
+                    <option key={state.isoCode} value={state.isoCode}>
+                      {state.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="flex flex-col">
                 <span>Select your city</span>
-              </div>
-              <div className="flex flex-col">
-                <span>Pincode:</span>
-                <input type="number" className=" mb-2 py-2 px-1 border rounded border-gray-300" />
+                <select
+                  id="city"
+                  className="border h-10 mt-1 rounded border-gray-300"
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  value={selectedCity}
+                  disabled={!cities.length}
+                >
+                  <option value="">Select City</option>
+                  {cities.map((city) => (
+                    <option key={city.name} value={city.name}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className=" flex justify-between ">
               <div className="flex flex-col">
                 <p className="">Type of property:</p>
                 <select
-                  className="border py-2 mt-1 rounded border-gray-300"
+                  className="border h-10 mt-1 rounded border-gray-300"
                   onChange={(e) => {
-                    setFormData({ ...formData, category: e.target.value });
+                    setFormData({
+                      ...formData,
+                      typeOfProperty: e.target.value,
+                    });
                   }}
                 >
-                  <option className="" value="hostel">
+                  <option
+                    className="p-2 cursor-pointer hover:bg-gray-200"
+                    value="hostel"
+                  >
                     Hostel
                   </option>
                   <option
@@ -317,8 +391,8 @@ const HostelPostCard = () => {
                   >
                     No
                   </option>
-                  </select>
-                  </div>
+                </select>
+              </div>
             </div>
             <div className="flex gap-19">
               <div className="flex flex-col">
@@ -348,17 +422,17 @@ const HostelPostCard = () => {
                   >
                     No
                   </option>
-                  </select>
-                  </div>
+                </select>
+              </div>
             </div>
-<div className="">
-<Textarea
-              id="description"
-              className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
-              type="text"
-              placeholder="Write something about your property.."
-            />
-</div>
+            <div className="">
+              <Textarea
+                id="description"
+                className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
+                type="text"
+                placeholder="Write something about your property.."
+              />
+            </div>
             <FacilityProvided />
 
             <div className="">
@@ -385,18 +459,17 @@ const HostelPostCard = () => {
                       </div>
                     ))}
                   </div>
-                  {images.length > 0 && (
-                    <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">
-                      Upload
-                    </button>
-                  )}
                 </div>
               </div>
             </div>
           </div>
-         
         </div>
-        <button type="submit" className="rounded-full text-white bg-black py-2 px-8 cursor-pointer" >Add</button>
+        <button
+          type="submit"
+          className="rounded-full text-white bg-black py-2 px-8 cursor-pointer"
+        >
+          Add
+        </button>
       </form>
     </>
   );
