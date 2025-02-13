@@ -1,97 +1,81 @@
 import React, { useRef,useState,useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import {Alert, AlertTitle, CircularProgress} from '@mui/material'
-import { getCircularProgressUtilityClass } from '@mui/material'
-import { Link } from 'react-router-dom';
+import {Alert} from '@mui/material'
+import { Link,useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import GenderCheckBox from './GenderCheckBox';
+import UserImage from './UserImage';
+import { useDispatch } from 'react-redux';
+import { profileUpdateStart, profileUpdateSuccess, profileUpdateFailure } from '../redux/profile/profileSlice';
 const Userprofile = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({});
-  const filePickerRef =useRef()
-  const { currentUser ,error,loading} = useSelector((state) => state.user);
-  const [imageFile, setImageFile] = useState(null);
-  const [imageFileUrl, setImageFileUrl] = useState(null);
-  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
-  const [imageFileUploadError, setImageFileUploadError] = useState(null);
-  const [imageFileUploading, setImageFileUploading] = useState(null);
+  const { currentUser,loading} = useSelector((state) => state.user);
+  const [publishError, setPublishError] = useState(null);
+  const dispatch = useDispatch();
   const handleCheckboxChange = (gender)=>{
     setFormData({...formData, gender})
       }
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-      setImageFileUrl(URL.createObjectURL(file))
-    }
-  };
-  useEffect(() => {
-    if (imageFile) {
-      uploadImage();
-    }
-  }, [imageFile]);
-const uploadImage =async()=>{
-  setImageFileUploadError(null);
-}
-
   const handleChange =(e)=>{
-    setFormData({...formData,[e.target.id]:e.target.value})
+    if (typeof e === "string") {
+      setFormData((prev) => ({ ...prev, contactNumber: e }));
+    } else {
+      setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    }
   }
-  const handleSubmit =(e)=>{
+  useEffect(() => {
+    if (currentUser?.additionalDetails) {
+      setFormData({
+        firstName: currentUser.additionalDetails.firstName || '',
+        lastName: currentUser.additionalDetails.lastName || '',
+        dateOfBirth: currentUser.additionalDetails.dateOfBirth || '',
+        contactNumber: currentUser.additionalDetails.contactNumber || '',
+        emergencyContact: currentUser.additionalDetails.emergencyContact || '',
+        gender: currentUser.additionalDetails.gender || '',
+        address: currentUser.additionalDetails.address || '',
+      });
+    }
+  }, [currentUser]);
+
+  const handleSubmit =async (e)=>{
     e.preventDefault()
+    dispatch(profileUpdateStart());
+    try {
+      const res = await fetch('/api/profile/update-profile',{
+        method: 'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        credentials:'include',
+        body:JSON.stringify(formData),
+      });
+      const data= await res.json();
+      if(!res.ok){
+        dispatch(profileUpdateFailure(data.message));
+setPublishError(data.message)
+return;
+      }
+      if(res.ok){
+        dispatch(profileUpdateSuccess(data));
+        setPublishError(null)
+        navigate('/')
+      }
+    } catch (error) {
+      dispatch(profileUpdateFailure(error.message));
+      setPublishError('Something went wrong');
+    }
   }
   return (
     <div className='max-w-lg m-3 mx-auto p-3 w-full'>
-
        <nav className="text-sm text-gray-600 mb-4">
                 <Link to="/account-setting" className="hover:underline">Account</Link> &gt; <span>Personal info</span>
             </nav>
+            <UserImage/>
             <div className="flex justify-center  py-2 px-2">
+              
+              <div className="flex flex-col">
       <form onSubmit={handleSubmit} className="w-full ">
-        <div className="mt-2 mb-4">
-         
-        <input
-          type="file"
-          accept="image/*"
-          ref={filePickerRef}
-          onChange={handleImageChange}
-          hidden
-        />
-        </div>
-      <div className="relative w-34 h-34  cursor-pointer shadow-md overflow-hidden rounded-full"
-      onClick={()=>filePickerRef.current?.click()}
-      >
-{
-imageFileUploadProgress && (
-  <CircularProgress value={imageFileUploadProgress || 0}
-  text={`${imageFileUploadProgress}%`}
-  strokeWidth={5}
-  style={{
-    root: {
-      width: "100%",
-      height: "100%",
-      position: "absolute",
-      top: 0,
-      left: 0,
-    },
-    path: {
-      stroke: `rgba(62,152,199,${imageFileUploadProgress / 100})`,
-    },
-  }}
-  />
-)}
-<img src={imageFileUrl || currentUser.profilePicture} alt="user"
-className={`rounded-full w-full h-full object-cover border-8 border-[lightgray]
-${
-  imageFileUploadProgress && 
-  imageFileUploadProgress<100 &&
-  "opacity-60"
-}`}
-/> </div>
-{
-  imageFileUploadError &&(
-    <AlertTitle color='failure'>{imageFileUploadError}</AlertTitle>
-  )}
   <div className="flex flex-col mt-2">
   <span>Username</span>
   <input disabled className='w-full mb-2 py-2 px-1 border rounded border-gray-300' placeholder={currentUser?.username} />
@@ -112,8 +96,8 @@ ${
         <div className="flex flex-col mt-2">
           <span>Phone number</span>
           <PhoneInput
-          id='contactNumber'
-          onChange={handleChange}
+        value={formData.contactNumber || ""}
+        onChange={(value) => handleChange(value)}
       className='py-1 px-1 border rounded border-gray-300 overflow-auto text-2xl text-gray-600'
   international
   defaultCountry="IN"
@@ -129,10 +113,11 @@ ${
 <div className="flex flex-col mt-2">
   <span>Emergency Contact *(optional)</span>
   <PhoneInput
-  onChange={handleChange}
+  value={formData.emergencyNumber || ""}
+  onChange={(value) => setFormData((prev) => ({ ...prev, emergencyNumber: value }))}
       className='py-1 mb-2 px-1 border rounded border-gray-300 overflow-auto text-2xl text-gray-600'
   international
-  id='emergencyContact'
+
   defaultCountry="IN"
  />
 </div>
@@ -141,8 +126,14 @@ ${
            onCheckboxChange={handleCheckboxChange}
           selectedGender={formData.gender} />
 </div>
-<button type='submit' disabled={loading || imageFileUploading}  className='border py-2 text-white bg-red-600 border-gray-200 px-4 rounded'>{loading ? 'Loading...' : 'Submit'}</button>
+<button type='submit' disabled={loading}  className='border py-2 text-white bg-red-600 border-gray-200 px-4 cursor-pointer rounded'>{loading ? 'Loading...' : 'Submit'}</button>
+{publishError && (
+          <Alert className='mt-5' color='failure'>
+            {publishError}
+          </Alert>
+        )}
       </form>
+      </div>
       </div>
     </div>
   )

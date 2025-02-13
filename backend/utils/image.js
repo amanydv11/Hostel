@@ -1,17 +1,29 @@
-const cloudinary = require("cloudinary").v2;
+import cloudinary from 'cloudinary'
 
-exports.uploadImageToCloudinary = async(file, folder , height, quality)=>{
+export const uploadImageToCloudinary = async(file, folder , height, quality)=>{
 
-    const options = {folder};
-    if(height){
-        options.height= height;
+    try {
+        if (!file || !file.tempFilePath) {
+            throw new Error("No file or invalid file provided");
+        }
+
+        const options = {
+            folder,
+            resource_type: "auto",
+        };
+
+        if (height) {
+            options.height = height;
+        }
+
+        if (quality) {
+            options.quality = quality;
+        }
+
+        const result = await cloudinary.v2.uploader.upload(file.tempFilePath, options);
+        return result;
+    } catch (error) {
+        console.error("Error in uploadImageToCloudinary:", error);
+        throw error;
     }
-
-    if(quality){
-        options.quality = quality;
-    }
-
-    options.resource_type = "auto";
-
-    return await cloudinary.uploader.upload(file.tempFilePath , options);
 }

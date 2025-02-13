@@ -17,11 +17,11 @@ type:String,
         type:String
     },
     contactNumber:{
-        type:Number,
+        type:String,
         trim:true
     },
     emergencyContact:{
-        type:Number,
+        type:String,
         trim:true
     }
 });

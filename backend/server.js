@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import profileRoutes from './routes/profileRoute.js'
 import { cloudinaryConnect } from './utils/cloudinary.js';
 import fileUpload from 'express-fileupload';
 dotenv.config();
@@ -31,7 +32,7 @@ app.use(
 
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
-
+app.use('/api/profile',profileRoutes)
 
 
 

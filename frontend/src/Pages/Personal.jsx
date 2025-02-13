@@ -19,7 +19,11 @@ const Personal = () => {
                     <div>
                         <h2 className="text-lg font-semibold">Profile Picture</h2>
                         <div className="">
-                        <p className="text-gray-500">Not provided</p>
+                        <div className="text-gray-500">
+                            <div className="">
+                                <img src={currentUser?.profilePicture} alt="profile" className="w-full h-40 rounded-full" />
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,8 @@ export const cloudinaryConnect = ()=>{
 			api_key: process.env.API_KEY,
 			api_secret: process.env.API_SECRET,
 		});
+		console.log("Cloudinary connected successfully");
 	} catch (error) {
-		console.log(error);
+		console.log("Error connecting to Cloudinary");
 	}
 }
