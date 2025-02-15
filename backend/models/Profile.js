@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const profileSchema = new mongoose.Schema({
     firstName:{
         type:String,
-        true:true
+        required:true
     },
     lastName:{
 type:String,

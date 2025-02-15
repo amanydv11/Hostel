@@ -1,4 +1,4 @@
-import Profile from '../models/profileModel.js'
+import Profile from '../models/Profile.js'
 import User from '../models/userModel.js'
 import {uploadImageToCloudinary} from '../utils/image.js'
 import dotenv from "dotenv";
@@ -17,16 +17,53 @@ export const updateProfile = async(req,res)=>{
           } = req.body;
           const id= req.user.id;
           const userDetails = await User.findById(id);
-          const profile = await Profile.findById(userDetails.additionalDetails);
-          await profile.save();
-          profile.firstName = firstName || profile.firstName;
-          profile.lastName = lastName || profile.lastName;
-          profile.dateOfBirth = dateOfBirth || profile.dateOfBirth;
-          profile.address = address || profile.address;
-          profile.contactNumber = contactNumber || profile.contactNumber;
-          profile.emergencyContact = emergencyContact || profile.emergencyContact;
-          profile.gender = gender || profile.gender;
-          await profile.save();
+          if(!userDetails){
+            return res.status(404).json({
+              success:false,
+              message:"User not found"
+            })
+          }
+          console.log(userDetails);
+
+          let profile;
+          if(!userDetails.additionalDetails){
+            profile = await Profile.create({
+                
+                firstName:firstName,
+                lastName:lastName,
+                dateOfBirth:dateOfBirth,
+                contactNumber:contactNumber,
+                emergencyContact:emergencyContact,
+                gender:gender,
+                address:address,
+            })
+            userDetails.additionalDetails = profile._id;
+            await userDetails.save();
+          }else{
+            profile = await Profile.findById(userDetails.additionalDetails);
+            if(!profile){
+              profile = await Profile.create({
+                firstName:firstName,
+                lastName:lastName,
+                dateOfBirth:dateOfBirth,
+                contactNumber:contactNumber,
+                emergencyContact:emergencyContact,
+              })  
+              userDetails.additionalDetails = profile._id;
+              await userDetails.save();
+          }
+          else{
+            profile.firstName = firstName || profile.firstName;
+            profile.lastName = lastName || profile.lastName;
+            profile.dateOfBirth = dateOfBirth || profile.dateOfBirth;
+            profile.address = address || profile.address;
+            profile.contactNumber = contactNumber || profile.contactNumber;
+            profile.emergencyContact = emergencyContact || profile.emergencyContact;
+            profile.gender = gender || profile.gender;
+            await profile.save();
+          }
+        }
+
           const updatedUserDetails = await User.findById(id)
           .populate("additionalDetails")
           .exec();
@@ -93,4 +130,23 @@ export const updateProfile = async(req,res)=>{
           res.status(500).json({ success: false, message: error.message });
       }
   };
-  
+
+  export const getProfile = async(req,res)=>{
+    try {
+        const userId = req.user.id;
+        const userDetails = await User.findById(userId)
+        .populate("additionalDetails")
+        .exec();
+        if(!userDetails){
+            return res.status(404).json({success:false,message:"User not found"})
+        }
+        return res.status(200).json({
+            success:true,
+            message:"Profile fetched successfully",
+            data:userDetails,
+        })
+    } catch (error) {
+        return res.status(500).json({success:false,message:error.message})
+
+    }
+  }

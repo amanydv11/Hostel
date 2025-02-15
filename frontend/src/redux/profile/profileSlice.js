@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-const  initialState= {
+const  initialState = {
     userProfile: null,
     loading: false,
     error: null,
@@ -24,4 +24,5 @@ const  initialState= {
     }
   })
   export const {profileUpdateFailure,profileUpdateStart,profileUpdateSuccess} =profileSlice.actions;
+  export const selectUserProfile = (state) => state.profile.userProfile;
   export default profileSlice.reducer;

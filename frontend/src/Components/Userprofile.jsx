@@ -97,7 +97,7 @@ return;
           <span>Phone number</span>
           <PhoneInput
         value={formData.contactNumber || ""}
-        onChange={(value) => handleChange(value)}
+        onChange={(value) => setFormData((prev) => ({ ...prev, contactNumber: value }))}
       className='py-1 px-1 border rounded border-gray-300 overflow-auto text-2xl text-gray-600'
   international
   defaultCountry="IN"
@@ -113,8 +113,8 @@ return;
 <div className="flex flex-col mt-2">
   <span>Emergency Contact *(optional)</span>
   <PhoneInput
-  value={formData.emergencyNumber || ""}
-  onChange={(value) => setFormData((prev) => ({ ...prev, emergencyNumber: value }))}
+  value={formData.emergencyContact || ""}
+  onChange={(value) => setFormData((prev) => ({ ...prev, emergencyContact: value }))}
       className='py-1 mb-2 px-1 border rounded border-gray-300 overflow-auto text-2xl text-gray-600'
   international
 

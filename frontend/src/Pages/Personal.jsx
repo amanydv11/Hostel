@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { Divider } from '@mui/material';
 import { MdOutlineLockPerson } from "react-icons/md";
 import { FaEye } from 'react-icons/fa';
 import { useSelector } from "react-redux";
+import { fetchUserProfile } from '../redux/profile/profileActions';
+import { useDispatch } from 'react-redux';
+
+
 const Personal = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const {userProfile} = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
+ 
+  const profileDetails = userProfile?.additionalDetails || {};
+
   return (
     <div className="max-w-7xl mx-auto p-6">
     <div className="flex flex-col md:flex-row">
@@ -21,7 +33,7 @@ const Personal = () => {
                         <div className="">
                         <div className="text-gray-500">
                             <div className="">
-                                <img src={currentUser?.profilePicture} alt="profile" className="w-full h-40 rounded-full" />
+                                <img src={currentUser?.profilePicture} alt="profile" className="w-50 h-50 rounded-full" />
                             </div>
                         </div>
                         </div>
@@ -30,16 +42,16 @@ const Personal = () => {
                 <Divider/>
                 <div className="flex justify-between items-center">
                     <div>
-                        <h2 className="text-lg font-semibold">First name</h2>
-                        <p>Aman Yadav</p>
+                        <h2 className="text-lg font-semibold">UserName</h2>
+                        <p>{currentUser?.username}</p>
                     </div>
                    
                 </div>
                 <Divider/>
                 <div className="flex justify-between items-center">
                     <div>
-                        <h2 className="text-lg font-semibold"> Last name *(optional)</h2>
-                        <p className="text-gray-500">Not provided</p>
+                        <h2 className="text-lg font-semibold"> Full name</h2>
+                        <p className="text-gray-500">{`${profileDetails?.firstName}  ${profileDetails?.lastName}`}</p>
                     </div>
                   
                 </div>
@@ -47,7 +59,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Date of Birth</h2>
-                        <p>Aman Yadav</p>
+                        <p>{userProfile?.dateOfBirth}</p>
                     </div>
                    
                 </div>
@@ -63,7 +75,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Phone number</h2>
-                        <p className="text-gray-500">Add a number so confirmed guests and Airbnb can get in touch. You can add other numbers and choose how they’re used.</p>
+                        <p className="text-gray-500">{userProfile?.contactNumber}</p>
                     </div>
                 </div>
                 <Divider/>
@@ -78,7 +90,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Address</h2>
-                        <p className="text-gray-500">Not provided</p>
+                        <p className="text-gray-500">{userProfile?.address}</p>
                     </div>
                    
                 </div>
@@ -86,7 +98,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Emergency contact</h2>
-                        <p className="text-gray-500">Not provided</p>
+                        <p className="text-gray-500">{userProfile?.emergencyContact}</p>
                     </div>
                 </div>
                 <div className="flex justify-center">
