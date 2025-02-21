@@ -10,20 +10,18 @@ import { useDispatch } from 'react-redux';
 
 const Personal = () => {
   const { currentUser } = useSelector((state) => state.user);
-  const {userProfile} = useSelector((state) => state.profile);
+  const {userProfile,loading} = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
- 
-  const profileDetails = userProfile?.additionalDetails || {};
-
+  const profileDetails = userProfile?.updatedUserDetails?.additionalDetails || {};
   return (
     <div className="max-w-7xl mx-auto p-6">
     <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-2/3">
             <nav className="text-sm text-gray-600 mb-4">
-                <a href="#" className="hover:underline">Account</a> &gt; <span>Personal info</span>
+                <Link to='/account-setting' className="hover:underline">Account</Link> &gt; <span>Personal info</span>
             </nav>
             <h1 className="text-3xl font-bold mb-6">Personal info</h1>
             <div className="space-y-6">
@@ -51,7 +49,11 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold"> Full name</h2>
-                        <p className="text-gray-500">{`${profileDetails?.firstName}  ${profileDetails?.lastName}`}</p>
+                        <p className="text-gray-500">
+                  {profileDetails?.firstName || profileDetails?.lastName 
+                    ? `${profileDetails.firstName || ''} ${profileDetails.lastName || ''}`
+                    : 'Not set'}
+                </p>
                     </div>
                   
                 </div>
@@ -59,7 +61,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Date of Birth</h2>
-                        <p>{userProfile?.dateOfBirth}</p>
+                        <p>{profileDetails?.dateOfBirth || 'Not set'}</p>
                     </div>
                    
                 </div>
@@ -68,14 +70,14 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Email address</h2>
-                        <p>{currentUser?.email}</p>
+                        <p>{currentUser?.email || 'Not set'}</p>
                     </div>
                 </div>
                 <Divider/>
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Phone number</h2>
-                        <p className="text-gray-500">{userProfile?.contactNumber}</p>
+                        <p className="text-gray-500">{profileDetails?.contactNumber || 'Not set'}</p>
                     </div>
                 </div>
                 <Divider/>
@@ -90,7 +92,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Address</h2>
-                        <p className="text-gray-500">{userProfile?.address}</p>
+                        <p className="text-gray-500">{profileDetails?.address|| 'Not set'}</p>
                     </div>
                    
                 </div>
@@ -98,7 +100,7 @@ const Personal = () => {
                 <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Emergency contact</h2>
-                        <p className="text-gray-500">{userProfile?.emergencyContact}</p>
+                        <p className="text-gray-500">{profileDetails?.emergencyContact || 'Not set'}</p>
                     </div>
                 </div>
                 <div className="flex justify-center">

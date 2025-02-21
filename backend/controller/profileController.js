@@ -131,6 +131,9 @@ export const updateProfile = async(req,res)=>{
       }
   };
 
+
+
+  
   export const getProfile = async(req,res)=>{
     try {
         const userId = req.user.id;

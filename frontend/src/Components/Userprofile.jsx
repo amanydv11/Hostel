@@ -59,7 +59,7 @@ return;
       if(res.ok){
         dispatch(profileUpdateSuccess(data));
         setPublishError(null)
-        navigate('/')
+        navigate('/profile')
       }
     } catch (error) {
       dispatch(profileUpdateFailure(error.message));
