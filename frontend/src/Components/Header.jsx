@@ -78,7 +78,7 @@ const Header = () => {
           <img src={mylogo} alt="" className="h-20 cursor-pointer w-40 p-2" />
         </Link>
       </div>
-      <div className="flex justify-center items-center">
+      <div className="hidden md:flex justify-center items-center">
         <form onSubmit={handleSubmit}>
         <Paper
           component="form"
@@ -109,14 +109,14 @@ const Header = () => {
        
       </div>
 
-      <div className="hidden md:flex items-center justify-end space-x-4">
+      <div className="flex items-center justify-end space-x-4">
         {
           currentUser?(
-<button onClick={()=>navigate('/create_your_property')} className="cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full border border-gray-300 px-4 py-2">
+<button onClick={()=>navigate('/create_your_property')} className="hidden md:block cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full border border-gray-300 px-4 py-2">
           Your Listings
         </button>
           ):(
-<button onClick={()=>navigate('/login')} className="cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full border border-gray-300 px-4 py-2">
+<button onClick={()=>navigate('/login')} className="hidden md:block cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full border border-gray-300 px-4 py-2">
           List your property
         </button>
           )
