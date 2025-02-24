@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 const propertySchema = new mongoose.Schema({
+    owner: {type:mongoose.Schema.Types.ObjectId, ref:'User'},
+    
 name:{
     type:String,
     required:true
@@ -42,25 +44,31 @@ genderallow:{
     required:true
 },
 priceSingleAc:{type:Number,
-    required:true
+   
 },
 priceDoubleAc:{type:Number,
-    required:true
+    
 },
 priceSingleNonAc:{type:Number,
-    required:true
+    
 },
-priceSingleAc:{type:Number,
-    required:true
+priceDoubleNonAc:{type:Number,
+    
 },
-priceSingleAc:{type:Number,
-    required:true
+priceSingleCooler:{type:Number,
+  
 },
-priceSingleAc:{type:Number,
-    required:true
+priceDoubleCooler:{type:Number,
+   
 },
-priceSingleAc:{type:Number,
-    required:true
+priceof1bhk:{type:Number,
+    
+},
+priceof2bhk:{type:Number,
+    
+},
+priceof3bhk:{type:Number,
+    
 },
 facility:{
 type:String,

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import { RxCross2 } from "react-icons/rx";
 import { Link,useNavigate } from 'react-router-dom';
 import { FaApple, FaSpinner} from 'react-icons/fa'
@@ -57,8 +56,10 @@ const handleSubmit= async (e)=>{
       <div className="bg-white p-6 max-w-lg m-11 rounded-lg shadow-lg  w-full">
                     <h1 className="text-2xl font-semibold mb-4">Welcome to MyHostel</h1>
                         <form onSubmit={handleSubmit} className='w-full'>
-                        <input id='email' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="email" label='Email' onChange={handleChange} placeholder='Email' />
-                        <input id='password' className='w-full py-2 px-1 border rounded border-gray-300' type="password" onChange={handleChange} placeholder='**********' />
+                        <input id='email' className='w-full mb-2 py-2 px-1 border rounded border-gray-300'
+                         type="email" label='Email'   placeholder='Email' onChange={handleChange} />
+                        <input id='password' className='w-full py-2 px-1 border rounded border-gray-300'
+                         type="password"   placeholder='**********' onChange={handleChange} />
                         <p className="text-xs text-gray-500 mb-4">
     We’ll call or text you to confirm your number. Standard message and data rates apply. <a href="#" className="text-black font-bold underline gap-1">Privacy Policy</a>
 </p>

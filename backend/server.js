@@ -8,6 +8,7 @@ import userRoutes from './routes/userRoutes.js'
 import profileRoutes from './routes/profileRoute.js'
 import { cloudinaryConnect } from './utils/cloudinary.js';
 import fileUpload from 'express-fileupload';
+import roomRoutes from './routes/roomRoutes.js'
 dotenv.config();
 mongoose
 .connect(
@@ -33,6 +34,7 @@ app.use(
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 app.use('/api/profile',profileRoutes)
+app.use('/api/room',roomRoutes)
 
 
 

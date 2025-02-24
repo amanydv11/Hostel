@@ -23,7 +23,7 @@ const HostelCard = () => {
         </AspectRatio>
       </CardOverflow>
       <CardContent>
-      <div className="">
+      <div   >
         <Typography level="title-md">Yosemite National Park</Typography>
         <Typography level="body-sm">California</Typography>
         <IconButton

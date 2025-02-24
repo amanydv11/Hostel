@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 const Home = () => {
   return (
     <div className='mt-'>
-      <div className="">
+      <div   >
         <Button>hey</Button>
       </div>
     </div>

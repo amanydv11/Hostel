@@ -3,13 +3,41 @@ import FacilityProvided from "./FacilityProvided";
 import { Textarea } from "@headlessui/react";
 import { Country, State, City } from "country-state-city";
 const HostelPostCard = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+name:'',
+address:'',
+pincode:'',
+state:'',
+city: '',
+    description: '',
+    typeOfProperty: '',
+    typeOfRoom: '',
+    room: '',
+    priceSingleAc: '',
+    priceDoubleAc: '',
+    priceSingleNonAc: '',
+    priceDoubleNonAc: '',
+    priceSingleCooler: '',
+    priceDoubleCooler: '',
+    priceof1bhk: '',
+    priceof2bhk: '',
+    priceof3bhk: '',
+    facilities: [],
+    image: null
+  });
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+
+  const handleFacilitiesChange = (facilities) => {
+    setFormData(prev => ({
+      ...prev,
+      facilities
+    }));
+  };
 
   useEffect(() => {
     if (selectedCountry) {
@@ -25,17 +53,28 @@ const HostelPostCard = () => {
       setSelectedCity("");
     }
   }, [selectedState]);
-  const handleSubmit = () => {
-    e, preventDefault();
-  };
-  const handleChange = (event) => {
-    const value = event.target.value;
-    if (selectedOptions.includes(value)) {
-      setSelectedOptions(selectedOptions.filter((option) => option !== value));
-    } else {
-      setSelectedOptions([...selectedOptions, value]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+        const res = await fetch('/api/room/add-room', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+
+        if (!res.ok) {
+            const errorData = await res.text(); 
+            throw new Error(errorData || 'Failed to create room');
+        }
+
+        const data = await res.json();
+        console.log('Room added:', data);
+    } catch (error) {
+        console.error('Error:', error.message);
     }
-  };
+};
+
 
   const [images, setImages] = useState([]);
 
@@ -137,7 +176,7 @@ const HostelPostCard = () => {
             </div>
             <div className=" flex justify-between ">
               <div className="flex flex-col">
-                <p className="">Type of property:</p>
+                <p   >Type of property:</p>
                 <select
                   className="border h-10 mt-1 rounded border-gray-300"
                   onChange={(e) => {
@@ -425,7 +464,7 @@ const HostelPostCard = () => {
                 </select>
               </div>
             </div>
-            <div className="">
+            <div   >
               <Textarea
                 id="description"
                 className="w-full mb-2 py-2 px-1 border rounded border-gray-300"
@@ -433,13 +472,19 @@ const HostelPostCard = () => {
                 placeholder="Write something about your property.."
               />
             </div>
-            <FacilityProvided />
 
-            <div className="">
+            <div   >
+              <h1 className="text-2xl mt-5 mb-5 font-semibold">Perks:</h1>
+            <FacilityProvided onChange={handleFacilitiesChange} />
+            </div>
+            
+
+            <div   >
               <h1 className="text-2xl mt-5 mb-5 font-semibold">
                 Upload Images:
               </h1>
-              <div className="">
+              <div>
+
                 <div className=" w-full max-w-lg mx-auto">
                   <input
                     type="file"
@@ -448,6 +493,7 @@ const HostelPostCard = () => {
                     onChange={handleImageChange}
                     className="mb-3 block w-full p-2 border border-gray-300 rounded-lg cursor-pointer"
                   />
+                  
                   <div className="grid grid-cols-3 gap-2">
                     {images.map((img, index) => (
                       <div key={index} className="relative">
@@ -456,6 +502,7 @@ const HostelPostCard = () => {
                           alt={`upload-preview-${index}`}
                           className="w-42 h-32 object-cover "
                         />
+
                       </div>
                     ))}
                   </div>

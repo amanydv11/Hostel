@@ -57,7 +57,7 @@ const App = () => {
      <Route path='/forgot_pass' element={<ForgotPassword/>}/>
      <Route path='/reset/:token' element={<ResetPassword/>}/>
 <Route path='*' element={<Notfound/>}/>
-<Route path='/card' element={<HostelPostCard/>}/>
+<Route path='/create_your_property' element={<HostelPostCard/>}/>
      </Routes>
      <Footer/>
      </BrowserRouter> 

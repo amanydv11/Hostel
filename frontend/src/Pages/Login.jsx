@@ -64,7 +64,7 @@ const Login = () => {
             p:2,
             borderRadius: "10px",
           }}
-        ><div className="">
+        ><div   >
           <button className="cursor-pointer" onClick={handleClose} ><RxCross2/></button>
           <p className="flex items-center justify-center font-serif text-xl mb-4">Login or Signin</p>
         </div>

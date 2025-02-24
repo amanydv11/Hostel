@@ -73,7 +73,7 @@ const Header = () => {
     <div className={`${location.pathname.includes("/host")?' invisible':''}`} >
 
     <div className="flex  bg-white border-gray-300 border-b-2 justify-between items-center px-4">
-      <div className="">
+      <div   >
         <Link to="/">
           <img src={mylogo} alt="" className="h-20 cursor-pointer w-40 p-2" />
         </Link>
@@ -109,15 +109,14 @@ const Header = () => {
        
       </div>
 
-      {/* Desktop Navigation */}
       <div className="hidden md:flex items-center justify-end space-x-4">
         {
           currentUser?(
-<button onClick={()=>navigate('/host')} className="cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full px-4 py-2">
-          Manage Listing
+<button onClick={()=>navigate('/create_your_property')} className="cursor-pointer from-neutral-800  hover:bg-gray-100 rounded-full border border-gray-300 px-4 py-2">
+          Your Listings
         </button>
           ):(
-<button onClick={()=>navigate('/host')} className="cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full px-4 py-2">
+<button onClick={()=>navigate('/login')} className="cursor-pointer from-neutral-800 hover:bg-gray-100 rounded-full border border-gray-300 px-4 py-2">
           List your property
         </button>
           )
@@ -132,7 +131,7 @@ const Header = () => {
 {
   currentUser? (
     <Menu as='div' className="relative inline-block text-left">
-    <div className="">
+    <div   >
     <MenuButton  className="hover:bg-gray-100 m-2 cursor-pointer bg-white flex gap-2 border border-gray-300 rounded-full p-2">
       <FaBars className="mt-1 h-4" />
       <Avatar alt="user" sx={{height:"25px",width:"25px"
@@ -178,7 +177,7 @@ Messages
       </Link>
       </MenuItem>
       <MenuItem>
-      <Link to='/listyourproperty' >
+      <Link to='/create_your_property' >
       <button
           className=" cursor-pointer w-full text-left hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
         >
@@ -208,7 +207,7 @@ Messages
   ):
   (
     <Menu as='div' className="relative inline-block text-left">
-    <div className="">
+    <div   >
     <MenuButton  className="hover:bg-gray-100 m-3 cursor-pointer bg-white flex gap-2 border border-gray-300 rounded-full p-2">
       <FaBars className="mt-1" />
       <FaUser className="m-1" />
@@ -271,62 +270,6 @@ Messages
        
         
       </div>
-      {/*
-      <Modal open={open} onClose={handleClose}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 600,
-            bgcolor: "background.paper",
-            boxShadow:"24",
-            p:2,
-            borderRadius: "10px",
-          }}
-        ><div className="">
-          <button className="cursor-pointer" onClick={handleClose} ><RxCross2/></button>
-          <p className="flex items-center justify-center font-serif text-xl mb-4">Login or Signin</p>
-        </div>
-        <Divider/>
-          <Login/>
-        </Box>
-      </Modal>
-      */}
-      
-      <div className="md:hidden flex items-center">
-        <button
-          onClick={toggleDropdown}
-          className="hover:bg-gray-100 bg-white flex gap-2  border-gray-300 p-2"
-        >
-          <FaUserCircle className=" cursor-pointer mt-1 h-10 w-10" />
-        </button>
-      </div>
-      {dropdownOpen && (
-        <div className="absolute top-16 right-4 bg-white shadow-lg rounded-lg p-4 z-50">
-          <ul className="space-y-4">
-            <li>
-              <button className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2 w-full text-left">
-                List your property
-              </button>
-            </li>
-            <li>
-              <button className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2 w-full text-left">
-                <LanguageIcon />
-                Change Language
-              </button>
-            </li>
-            <li>
-              <button className="cursor-pointer hover:bg-gray-100 rounded-full px-4 py-2 w-full text-left">
-                <FaUser className="inline mr-2" />
-                Profile
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
-       
     </div>
     </div>
   );

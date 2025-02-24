@@ -28,9 +28,9 @@ const Personal = () => {
             <div className="flex justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">Profile Picture</h2>
-                        <div className="">
+                        <div   >
                         <div className="text-gray-500">
-                            <div className="">
+                            <div   >
                                 <img src={currentUser?.profilePicture} alt="profile" className="w-50 h-50 rounded-full" />
                             </div>
                         </div>

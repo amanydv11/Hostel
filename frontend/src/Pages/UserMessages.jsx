@@ -39,7 +39,7 @@ const UserMessages = () => {
         </div>
         <div className="flex space-x-2 mb-4">
         <Menu as='div' className="relative inline-block text-left">
-    <div className="">
+    <div   >
     <MenuButton  className="bg-black justify-center items-center cursor-pointer text-white flex gap-2 border border-gray-300 rounded-full p-2">
                 <span>All</span>
                 <FaAngleDown/>

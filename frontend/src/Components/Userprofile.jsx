@@ -82,15 +82,15 @@ return;
 </div>
 <div className="flex flex-col mt-2">
   <span>First name</span>
-  <input onChange={handleChange} id='firstName' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
+  <input   id='firstName' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
 </div>
         <div className="flex flex-col mt-2">
           <span>Last name </span>
-        <input onChange={handleChange} id='lastName' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
+        <input   id='lastName' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='' />
         </div>
         <div className="flex flex-col mt-2">
           <span>Date of birth</span>
-        <input onChange={handleChange} id='dateOfBirth' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="date" />
+        <input   id='dateOfBirth' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="date" />
         </div>
         
         <div className="flex flex-col mt-2">
@@ -107,7 +107,7 @@ return;
 
 <div className="flex flex-col mt-2">
   <span>Address:</span>
-<textarea onChange={handleChange} id='address' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='Enter your permanent address' />
+<textarea   id='address' className='w-full mb-2 py-2 px-1 border rounded border-gray-300' type="text" placeholder='Enter your permanent address' />
 </div>
 
 <div className="flex flex-col mt-2">
