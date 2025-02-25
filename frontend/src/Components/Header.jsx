@@ -158,21 +158,21 @@ const Header = () => {
                   </MenuItem>
                   <Divider />
                   <MenuItem>
-                    <Link to="/wishlist">
+                    <Link to="/:userId/wishlist">
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Wishlists
                       </button>
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/wishlist">
+                    <Link to="/:userId/trip">
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Trip history
                       </button>
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/wishlist">
+                    <Link to="/:userId/reservation">
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Reservation List
                       </button>

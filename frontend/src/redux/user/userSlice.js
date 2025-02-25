@@ -66,11 +66,28 @@ const userSlice = createSlice({
     updateProfilePictureFailure:(state,action)=>{
       state.loading =false;
       state.error =action.payload;
-    },  
+    },
+    setListings: (state, action) => {
+      state.listings = action.payload.listings
+    }, 
+    setTripList: (state, action) => {
+      state.currentUser .tripList = action.payload
+    },
+    setWishList: (state, action) => {
+      state.currentUser.wishList = action.payload
+    },
+    setPropertyList: (state, action) => {
+      state.currentUser.propertyList = action.payload
+    },
+    setReservationList: (state, action) => {
+      state.currentUser.reservationList = action.payload
+    }
+ 
 }
 })
 
 export const {signInStart,signInFailure,signInSuccess,
   updateStart,updateSuccess,updateFailure,
+  setListings,setTripList,setWishList,setPropertyList,setReservationList,
 deletUserStart,deleteUserSuccess,deleteUserFailure,signoutSuccess,updateProfilePictureStart,updateProfilePictureSuccess,updateProfilePictureFailure} =userSlice.actions;
 export default userSlice.reducer;

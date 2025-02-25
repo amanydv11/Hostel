@@ -31,7 +31,8 @@ const HostelPostCard = () => {
     highlightDesc:"",
     price: 0,
   });
-  const creatorId = useSelector((state) => state.user._id);
+  const { currentUser } = useSelector((state) => state.user);
+  const creatorId = currentUser._id;
   const navigate = useNavigate();
   const handleChangeLocation = (e) => {
     const { name, value } = e.target;
@@ -105,16 +106,20 @@ const HostelPostCard = () => {
       photos.forEach((photo) => {
         listingForm.append("listingPhotos", photo);
       });
-
      
       const response = await fetch("/api/properties/add-room", {
         method: "POST",
+        credentials: "include",
         body: listingForm,
       });
-
-      if (response.ok) {
-        navigate("/");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to create listing');
       }
+      const data = await response.json();
+      console.log("Success:", data);
+      navigate("/");
+
     } catch (err) {
       console.log("Publish Listing failed", err.message);
     }
@@ -150,13 +155,11 @@ const HostelPostCard = () => {
                   borderRadius: '10px',
                   cursor: 'pointer',
                   transition: '0.2s ease',
-                  hover: {
-                    border: '2px solid pinkred',
-                    backgroundColor: 'lightgrey'
-                  }
+                  backgroundColor: category === item.label ? '#f8395a1a' : 'white'
+                 
                 
                 }}  
-                  className={`  ${
+                  className={` hover:bg-gray-200 ${
                     category === item.label ? "selected" : ""
                   }`}
                   key={index}
@@ -182,13 +185,10 @@ const HostelPostCard = () => {
                   borderRadius: '10px',
                   cursor: 'pointer',
           transition: '0.3s ease',
-          hover: {
-            border: '2px solid pinkred',
-            backgroundColor: 'lightgrey'
-          }
+         backgroundColor: type === item.name ? '#f8395a1a' : 'white'
                 }}
                 
-                  className={` ${type === item.name ? "selected" : ""}`}
+                  className={` hover:bg-gray-200 ${type === item.name ? "selected" : ""}`}
                   key={index}
                   onClick={() => setType(item.name)}
                 >
@@ -444,6 +444,8 @@ const HostelPostCard = () => {
                 <div
                 style={{
                   transition: '0.2s ease',
+                  border: amenities.includes(item.name) ? `2px solid ${styles.pinkred}` : '1px solid grey',
+                  backgroundColor: amenities.includes(item.name) ? '#f8395a1a' : 'transparent',
                 }}
                   className={`flex flex-col justify-center items-center w-[200px] h-[90px] border border-gray-400 rounded-lg cursor-pointer  ${
                     amenities.includes(item.name) ? "selected" : ""

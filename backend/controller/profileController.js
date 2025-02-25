@@ -1,5 +1,5 @@
 import Profile from '../models/Profile.js'
-import User from '../models/userModel.js'
+import User from '../models/User.js'
 import {uploadImageToCloudinary} from '../utils/image.js'
 import dotenv from "dotenv";
 dotenv.config()

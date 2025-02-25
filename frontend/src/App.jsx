@@ -27,6 +27,11 @@ import ForgotPassword from './Components/auth/ForgotPassword'
 import ResetPassword from './Components/auth/ResetPassword'
 import HostelPostCard from './Components/host/HostelPostCard'
 import ScrollBar from './Components/ScrollBar'
+import PropertyDetails from './Pages/PropertyDetails'
+import CategoryPage from './Pages/CategoryPage'
+import Trip from './Pages/Trip'
+import PropertyList from './Pages/PropertyList'
+import Reservation from './Pages/Reservation'
 const App = () => {
   return (
     <>
@@ -41,7 +46,7 @@ const App = () => {
      <Route path='/guest/messages' element={<Messages/>}/>
      <Route path='/notification' element={<Notification/>}/>
      <Route path='/account-setting' element={<Useraccount/>}/>
-     <Route path='/wishlist' element={<Userwishlist/>}/>
+     <Route path='/:userId/wishlist' element={<Userwishlist/>}/>
      <Route path='/account-setting/profile' element={<Userprofile/>}/>
      <Route path='/help' element={<Help/>}/>
      <Route path='/host/hostel' element={<YourHostel/>}/>
@@ -58,6 +63,12 @@ const App = () => {
      <Route path='/reset/:token' element={<ResetPassword/>}/>
 <Route path='*' element={<Notfound/>}/>
 <Route path='/create_your_property' element={<HostelPostCard/>}/>
+<Route path='/properties/:propertyId' element={<PropertyDetails/>}/>
+<Route path='/properties/category/:category' element={<CategoryPage/>}/>
+<Route path='/:userId/trip' element={<Trip/>}/>
+<Route path='/:userId/properties' element={<PropertyList/>}/>
+<Route path='/:userId/reservation' element={<Reservation/>}/>
+
      </Routes>
      <Footer/>
      </BrowserRouter> 

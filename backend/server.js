@@ -9,6 +9,8 @@ import profileRoutes from './routes/profileRoute.js'
 import { cloudinaryConnect } from './utils/cloudinary.js';
 import fileUpload from 'express-fileupload';
 import roomRoutes from './routes/roomRoutes.js'
+import bookingRoutes from './routes/bookingRoute.js'
+import cors from 'cors'
 dotenv.config();
 mongoose
 .connect(
@@ -21,7 +23,12 @@ cloudinaryConnect()
 const __dirname = path.resolve();
 const app = express()
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}))
 
 const PORT = process.env.PORT || 5000
 app.use(
@@ -35,7 +42,7 @@ app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 app.use('/api/profile',profileRoutes)
 app.use('/api/properties',roomRoutes)
-
+app.use('/api/booking',bookingRoutes)
 
 
 
