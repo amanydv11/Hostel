@@ -1,0 +1,36 @@
+.slide {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("../../src/assets/homehostel.jpg");
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  
+    h1 {
+      font-size: clamp(20px, 5vw, 40px); 
+      color: rgba(255, 255, 255, 0.679);
+      max-width: 90%; 
+      line-height: 1.2;
+    }
+  }
+  @media (max-width: 768px) {
+    .slide {
+      height: 60vh; 
+    }
+  }
+  @media (max-width: 480px) {
+    .slide {
+      height: 50vh;
+    }
+  
+    h1 {
+      font-size: 22px;
+    }
+  }
+  

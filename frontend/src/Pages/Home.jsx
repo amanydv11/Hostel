@@ -1,10 +1,14 @@
 import React from 'react'
-import Button from '@mui/material/Button';
+
+import Slide from '../Components/Slide';
+import Categories from '../Components/Categories';
 const Home = () => {
   return (
-    <div className='mt-'>
+    <div className=''>
       <div   >
-        <Button>hey</Button>
+        <Slide/>
+        <Categories/>
+        
       </div>
     </div>
   )

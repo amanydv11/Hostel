@@ -34,7 +34,8 @@ app.use(
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 app.use('/api/profile',profileRoutes)
-app.use('/api/room',roomRoutes)
+app.use('/api/properties',roomRoutes)
+
 
 
 
