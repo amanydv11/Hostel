@@ -62,39 +62,39 @@ const HostelCard = ({
 
   return (
     <div
-      className="relative cursor-pointer p-[18px] rounded-md hover:shadow-md "
+      className="relative cursor-pointer p-[18px] rounded-md  bg-transparent hover:bg-white hover:shadow-xl transition-all duration-100"
       onClick={() => {
         navigate(`/properties/${propertyId}`);
       }}
     >
-      <div className="w-[300px] mb-[10px] border overflow-hidden rounded-md">
+      <div className="w-[300px] mb-[10px] border border-gray-300 overflow-hidden rounded-md">
         <div
-          style={{ transform: `translateX(-${currentIndex * 100}%)`,display:"flex",transition:"transform 0.5s ease" }}
+          style={{ transform: `translateX(-${currentIndex * 300}px)`,display:"flex",transition:"transform 0.5s ease",width:`${listingPhotoPaths?.length * 100}%` }}
         >
           {listingPhotoPaths?.map((photo, index) => (
-            <div key={index} className="relative w-full h-[270px] items-center flex ">
+            <div key={index} className="relative w-[300px] h-[270px] flex-shrink-0 ">
               <img
-              style={{width:"100%",height:"100%",filter:"brightness(85%)",objectFit:"cover"}}
-                src={`/api/${photo?.replace("public", "")}`}
+              style={{minWidth:"100%",height:"100%",filter:"brightness(85%)",objectFit:"cover"}}
+               src={photo}
                 alt={`photo ${index + 1}`}
               />
               <div
-                className="absolute p-[6px] rounded-lg border-none cursor-pointer top-1/2 transform-translate-y-[-50%]   flex items-center justify-center bg-[rgba(255,255,255,0.7)] z-9999"
+                className="absolute p-[6px] left-[10px] rounded-full border-none cursor-pointer top-[50%] transform-translate-y-[-50%] flex items-center justify-center bg-[rgba(255,255,255,0.7)] z-9999"
                 onClick={(e) => {
-                  e.stopPropagation();
                   goToPrevSlide(e);
+                  e.stopPropagation();
                 }}
               >
-                <ArrowBackIosNew sx={{ fontSize: "15px" }} />
+                <ArrowBackIosNew sx={{ fontSize: "15px"}} />
               </div>
               <div
-                className="absolute p-[6px] rounded-lg border-none cursor-pointer top-1/2 transform-translate-y-[-50%] right-2 flex items-center justify-center bg-[rgba(255,255,255,0.7)] z-9999"
-                onClick={(e) => {
-                  e.stopPropagation();
+                className="absolute p-[6px] rounded-full border-none  cursor-pointer top-[49%] transform-translate-y-[-50%] right-[10px] flex items-center justify-center bg-[rgba(255,255,255,0.7)] z-9999"
+                onClick={(e) => { 
                   goToNextSlide(e);
+                  e.stopPropagation();
                 }}
               >
-                <ArrowForwardIos sx={{ fontSize: "15px" }} />
+                <ArrowForwardIos sx={{ fontSize: "15px"}} />
               </div>
             </div>
           ))}
@@ -102,15 +102,15 @@ const HostelCard = ({
       </div>
 
       <h3 className="text-[18px] font-semibold">
-        {city}, {province}, {country}
+      {city},{province},{country}
       </h3>
       <p className="text-[14px] text-gray-600">{category}</p>
 
       {!booking ? (
         <>
           <p className="text-[14px] text-gray-600">{type}</p>
-          <p className="text-[14px] text-gray-600">
-            <span>${price}</span> per night
+          <p className="text-[16px] font-semibold gap-1 text-gray-700">
+            <span>₹{price}</span>/month
           </p>
         </>
       ) : (
@@ -128,7 +128,7 @@ const HostelCard = ({
         style={{
           position:"absolute",
           top:"20px",
-          right:"20px",
+          right:"25px",
           background:"none",
           border:"none",
           cursor:"pointer",

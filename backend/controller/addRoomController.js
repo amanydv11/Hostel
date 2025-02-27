@@ -82,7 +82,7 @@ export const getRooms = async (req, res, next) => {
    if(qCategory){
     properties = await Property.find({category:qCategory}).populate('creator');
    }else{
-    properties = await Property.find({}).populate('creator');
+    properties = await Property.find().populate('creator');
    }
    res.status(200).json(properties);
   } catch (error) {
@@ -93,7 +93,15 @@ export const getRooms = async (req, res, next) => {
 export const getRoomById = async (req, res) => {
   try {
     const {propertyId} = req.params;
-    const property = await Property.findById(propertyId).populate('creator');
+    const property = await Property.findById(propertyId).populate({
+      path: "creator",
+      select: "profilePicture additionalDetails",
+      populate: {
+        path: "additionalDetails",
+        model:"Profile",
+        select: "firstName",
+      },
+    });
     res.status(200).json(property);
   } catch (error) {
     res.status(404).json({message: "Property not found",error:error.message});

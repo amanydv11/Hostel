@@ -7,7 +7,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import '../../Components/HostelPostCard.css'
-
 const HostelPostCard = () => {
   const [category, setCategory] = useState(null);
   const [type, setType] = useState(null);
@@ -18,6 +17,7 @@ const HostelPostCard = () => {
     province: "",
     country: "",
   });
+  const [loading, setLoading] = useState(false);
   const [guestCount, setGuestCount] = useState(1);
   const [bedroomCount, setBedroomCount] = useState(1);
   const [bedCount, setBedCount] = useState(1);
@@ -79,7 +79,7 @@ const HostelPostCard = () => {
   };
   const handlePost = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       
       const listingForm = new FormData();
@@ -123,6 +123,7 @@ const HostelPostCard = () => {
     } catch (err) {
       console.log("Publish Listing failed", err.message);
     }
+    setLoading(false);
   };
   const styles = {
     pinkred: '#F8395A',
@@ -277,7 +278,7 @@ const HostelPostCard = () => {
 
             <div className="grid gap-[40px] grid-cols-2 max-w-[700px]">
               <div>
-                <p style={{fontWeight: '700', margin: '20px 0 10px'}}>Province</p>
+                <p style={{fontWeight: '700', margin: '20px 0 10px'}}>State/Province</p>
                 <input
                   style={{
                     border: '1px solid grey',
@@ -486,7 +487,7 @@ const HostelPostCard = () => {
                           }}>
                             <IoIosImages />
                           </div>
-                          <p>Upload from your device</p>
+                          <p className='text-gray-500'>Upload from your device</p>
                         </label>
                       </>
                     )}
@@ -664,8 +665,11 @@ const HostelPostCard = () => {
             </div>
           </div>
 
-          <button className="m-5 border-2 border-gray-300 rounded-md p-2 bg-red-400 text-white cursor-pointer hover:shadow-lg hover:shadow-gray-400" type="submit">
-            CREATE YOUR LISTING
+          <button className={`m-5 border-2 border-gray-300 rounded-md p-2 bg-red-400 text-white 
+        ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-lg hover:shadow-gray-400'}`} 
+      type="submit"
+      disabled={loading}>
+            {loading ? "Publishing..." : "CREATE YOUR LISTING"}
           </button>
         </form>
       </div> 

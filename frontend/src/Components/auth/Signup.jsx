@@ -51,10 +51,12 @@ const Signup = () => {
             setLoading(false);
         }
     };
-    const handleOtpVerification = async () => {
+    const handleOtpVerification = async (e) => {
+        e.preventDefault();
         if (!otp) return setErrorMessage("Please enter the OTP");
         try {
             setLoading(true);
+            setErrorMessage(null);
             const res = await fetch('/api/auth/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -64,6 +66,7 @@ const Signup = () => {
                 username: formData.username,  
                 password: formData.password,
                  }),
+                 credentials: 'include',
             });
 
             const data = await res.json();
@@ -162,9 +165,14 @@ const Signup = () => {
                             value={otp}
                             onChange={(e) => setOtp(e.target.value)}
                         />
-                        <button  onClick={handleOtpVerification} className="w-full bg-red-600 cursor-pointer text-white py-2 rounded-lg font-semibold">
-                            Verify OTP
+                        <button disabled={loading || !otp} onClick={handleOtpVerification} className="w-full bg-red-600 cursor-pointer text-white py-2 rounded-lg font-semibold">
+                            {loading ? "Verifying..." : "Verify OTP"}
                         </button>
+                        {errorMessage && (
+        <div className="mt-2 text-red-500 text-sm text-center">
+            {errorMessage}
+        </div>
+    )}
                     </Box>
                 </Modal>
 

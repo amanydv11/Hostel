@@ -23,7 +23,7 @@ export const signup = async (req, res, next) => {
     password === "" ||
     otp === ""
   ) {
-    next(errorHandler(400, "All fields are required"));
+   return next(errorHandler(400, "All fields are required"));
   }
   try {
     const tempUser = await TempUser.findOne({ email });
@@ -39,12 +39,25 @@ export const signup = async (req, res, next) => {
     if (tempUser.verifyOtpExpireAt < Date.now()) {
       return res.json({ success: false, message: "OTP Expired" });
     }
+    const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.json({ success: false, message: "User already exists" });
+        }
     const hashedPassword = await bcryptjs.hash(password, 10);
     const newUser = new User({
       email,
       username,
       password: hashedPassword,
       isAccountVerified: true,
+      additionalDetails: {      // Add this object with default values
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+        address: "",
+        gender: "",
+        dateOfBirth: null,
+        about: ""
+    }
     });
 
     await newUser.save();

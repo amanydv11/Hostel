@@ -67,11 +67,11 @@ const userSlice = createSlice({
       state.loading =false;
       state.error =action.payload;
     },
-    setListings: (state, action) => {
-      state.listings = action.payload.listings
+    setProperties: (state, action) => {
+      state.properties = action.payload.properties
     }, 
     setTripList: (state, action) => {
-      state.currentUser .tripList = action.payload
+      state.currentUser.tripList = action.payload
     },
     setWishList: (state, action) => {
       state.currentUser.wishList = action.payload
@@ -88,6 +88,6 @@ const userSlice = createSlice({
 
 export const {signInStart,signInFailure,signInSuccess,
   updateStart,updateSuccess,updateFailure,
-  setListings,setTripList,setWishList,setPropertyList,setReservationList,
+  setProperties,setTripList,setWishList,setPropertyList,setReservationList,
 deletUserStart,deleteUserSuccess,deleteUserFailure,signoutSuccess,updateProfilePictureStart,updateProfilePictureSuccess,updateProfilePictureFailure} =userSlice.actions;
 export default userSlice.reducer;
