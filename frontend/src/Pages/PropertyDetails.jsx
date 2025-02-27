@@ -21,8 +21,7 @@ const PropertyDetails = () => {
         credentials: "include",
       });
       const data = await res.json();
-      console.log("Full Property Data:", data);
-      console.log("Creator Data:", data.creator);
+    
 
       setProperty({ ...data, photos: data.listingPhotoPaths });
       setLoading(false);

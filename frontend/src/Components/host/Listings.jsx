@@ -19,7 +19,12 @@ try {
         {
             method: "GET",
             credentials: "include",
-        }
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        },
+        
     );
     const data = await response.json();
     dispatch(setProperties({properties:data}));

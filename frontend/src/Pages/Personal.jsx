@@ -12,12 +12,12 @@ const Personal = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(currentUser){
+      if(currentUser?._id){
     dispatch(fetchUserProfile())
     }
-  }, [dispatch,currentUser]);
+  }, [dispatch,currentUser?._id]);
 
-  const profileDetails = userProfile?.updatedUserDetails?.additionalDetails || {};
+  const profileDetails = userProfile?.data?.additionalDetails || {};
 
   return (
     <div className="max-w-7xl mx-auto p-6">

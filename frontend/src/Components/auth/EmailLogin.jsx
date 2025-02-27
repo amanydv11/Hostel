@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInStart,signInFailure,signInSuccess } from "../../redux/user/userSlice";
 import ForgotPassword from './ForgotPassword';
 import { fetchUserProfile } from '../../redux/profile/profileActions';
+import { clearUserProfile } from '../../redux/profile/profileSlice';
 const EmailLogin = () => {
   const[formData,setFormData] = useState({})
   const {loading,error:errorMessage} =useSelector(state=> state.user);
@@ -28,6 +29,7 @@ const handleSubmit= async (e)=>{
   }
   try {
       dispatch(signInStart());
+      dispatch(clearUserProfile());
       const res= await fetch('/api/auth/signin',{
           method:'POST',
           headers:{'Content-Type': 'application/json'},

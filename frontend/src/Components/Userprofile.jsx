@@ -6,7 +6,7 @@ import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import GenderCheckBox from './GenderCheckBox';
 import UserImage from './UserImage';
-import { profileUpdateStart, profileUpdateSuccess, profileUpdateFailure } from '../redux/profile/profileSlice';
+import { profileUpdateStart, profileUpdateSuccess, profileUpdateFailure, fetchProfileSuccess } from '../redux/profile/profileSlice';
 
 const Userprofile = () => {
   const navigate = useNavigate();
@@ -59,12 +59,20 @@ const Userprofile = () => {
         setPublishError(data.message);
         return;
       }
-      dispatch(profileUpdateSuccess(data));
-      setPublishError(null);
-      navigate('/profile');
+      if(data.success){
+        dispatch(fetchProfileSuccess(data));
+        dispatch(profileUpdateSuccess(data));
+        setPublishError(null);
+        navigate('/profile');
+      }
+      else{
+        dispatch(profileUpdateFailure(data.message));
+        setPublishError(data.message);
+      }
+      
     } catch (error) {
       dispatch(profileUpdateFailure(error.message));
-      setPublishError('Something went wrong');
+      setPublishError(error.message);
     }
   };
 
@@ -126,14 +134,16 @@ const Userprofile = () => {
               defaultCountry="IN"
             />
           </div>
-
-          <div className="col-span-2">
+<div className="col-span-2">
             <GenderCheckBox id="gender" onCheckboxChange={handleCheckboxChange} selectedGender={formData.gender} />
           </div>
+          
+
+          
         </div>
 
         <div className="mt-6">
-          <button type="submit" disabled={loading} className="w-full py-2 text-white bg-red-600 border border-gray-200 px-4 rounded hover:bg-red-700 transition">
+          <button type="submit" disabled={loading} className="w-full py-2 cursor-pointer text-white bg-red-600 border border-gray-200 px-4 rounded hover:bg-red-700 transition">
             {loading ? 'Loading...' : 'Submit'}
           </button>
         </div>

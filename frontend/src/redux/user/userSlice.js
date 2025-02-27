@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { clearUserProfile } from '../profile/profileSlice';
 const initialState = {
   currentUser: null,
   error: null,
@@ -18,6 +18,7 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
       state.loading = false;
       state.error = null;
+      clearUserProfile();
     },
     signInFailure: (state, action) => {
       state.loading = false;

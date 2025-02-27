@@ -1,5 +1,5 @@
 
-import { profileUpdateStart, profileUpdateSuccess, profileUpdateFailure } from './profileSlice';
+import { profileUpdateStart, fetchProfileSuccess, fetchProfileFailure } from './profileSlice';
 
 export const fetchUserProfile = () => async (dispatch) => {
     try {
@@ -11,11 +11,15 @@ export const fetchUserProfile = () => async (dispatch) => {
             credentials:'include',
            }
         );
-        if (response.data) {
-            dispatch(profileUpdateSuccess(response.data.userDetails));
+        const data = await response.json();
+        if (data.success) {
+            dispatch(fetchProfileSuccess(data));
+        }
+        else{
+            dispatch(fetchProfileFailure(data.message));
         }
     } catch (error) {
         console.log(error);
-        dispatch(profileUpdateFailure(error.response?.data?.message || error.message));
+        dispatch(fetchProfileFailure(error.response?.data?.message || error.message));
     }
 };
