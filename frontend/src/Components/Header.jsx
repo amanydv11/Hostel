@@ -13,9 +13,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { Avatar } from "@mui/material";
 import { signoutSuccess } from "../redux/user/userSlice";
+import { resetProfile } from "../redux/profile/profileSlice";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
   const path = useLocation().pathname;
   const location = useLocation();
   const dispatch = useDispatch();
@@ -23,7 +23,6 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);

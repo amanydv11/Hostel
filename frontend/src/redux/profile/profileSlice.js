@@ -21,8 +21,11 @@ const  initialState = {
             state.loading = false;
             state.error = action.payload;
           },
+          resetProfile:(state)=>{
+state.userProfile = null
+          }
     }
   })
-  export const {profileUpdateFailure,profileUpdateStart,profileUpdateSuccess} =profileSlice.actions;
+  export const {profileUpdateFailure,profileUpdateStart,profileUpdateSuccess,resetProfile} =profileSlice.actions;
   export const selectUserProfile = (state) => state.profile.userProfile;
   export default profileSlice.reducer;

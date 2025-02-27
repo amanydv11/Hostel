@@ -46,6 +46,7 @@ export const updateProfile = async(req,res)=>{
                 firstName:firstName,
                 lastName:lastName,
                 dateOfBirth:dateOfBirth,
+                address:address,
                 contactNumber:contactNumber,
                 emergencyContact:emergencyContact,
               })  

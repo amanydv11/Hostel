@@ -12,8 +12,10 @@ const Personal = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserProfile());
-  }, [dispatch]);
+    if(currentUser){
+    dispatch(fetchUserProfile())
+    }
+  }, [dispatch,currentUser]);
 
   const profileDetails = userProfile?.updatedUserDetails?.additionalDetails || {};
 

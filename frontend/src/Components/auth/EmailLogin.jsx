@@ -3,15 +3,15 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { RxCross2 } from "react-icons/rx";
 import { Link,useNavigate } from 'react-router-dom';
-import { FaApple, FaSpinner} from 'react-icons/fa'
+import { FaApple} from 'react-icons/fa'
 import { IoMdPhonePortrait } from "react-icons/io";
-import Login from '../../Pages/Login';
 import OAuth from './OAuth';
 import Faceauth from './Faceauth';
 import { Alert } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { signInStart,signInFailure,signInSuccess } from "../../redux/user/userSlice";
 import ForgotPassword from './ForgotPassword';
+import { fetchUserProfile } from '../../redux/profile/profileActions';
 const EmailLogin = () => {
   const[formData,setFormData] = useState({})
   const {loading,error:errorMessage} =useSelector(state=> state.user);
@@ -20,6 +20,7 @@ const EmailLogin = () => {
   const handleChange =(e)=>{
       setFormData({...formData,[e.target.id]: e.target.value.trim() })
   }
+
 const handleSubmit= async (e)=>{
   e.preventDefault()
   if(!formData.email || !formData.password){
