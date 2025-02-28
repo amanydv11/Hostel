@@ -2,7 +2,7 @@ import { errorHandler } from "../utils/error.js"
 import bcryptjs from 'bcryptjs';
 import User from '../models/User.js';
 import Property from '../models/Property.js';
-
+import Booking from '../models/Booking.js';
 export const updateUser =async(req, res,next)=>{
     if(req.user.id !== req.params.userId){
         return next(errorHandler(403,'You are not allow to update'));
@@ -114,20 +114,23 @@ export const getUsers = async (req, res, next) => {
       next(error);
     }
   };
-  export const addWishList = async (req, res, next) => {
+export const addWishList = async (req, res, next) => {
 try {
   const {userId,propertyId} = req.params;
   const user = await User.findById(userId);
+  if (!user.wishList) {
+    user.wishList = [];
+  }
   const property = await Property.findById(propertyId).populate('creator');
   const favoriteProperty = user.wishList.find((item)=>item._id.toString() === propertyId);
   if(favoriteProperty){
     user.wishList = user.wishList.filter((item)=>item._id.toString() !== propertyId);
     await user.save();
-    return res.status(200).json({message:"Property removed from wishlist"});
+    return res.status(200).json({message:"Property removed from wishlist", wishList: user.wishList});
   }else{
     user.wishList.push(property);
     await user.save();
-    return res.status(200).json({message:"Property added to wishlist"});
+    return res.status(200).json({message:"Property added to wishlist", wishList: user.wishList});
   }
   
 }catch (error) {
@@ -149,7 +152,7 @@ try {
   export const propertyList = async (req,res)=>{
     try {
       const {userId} = req.params;
-      const properties = await Property.find({creator:userId});
+      const properties = await Property.find({creator:userId}).populate("hostId propertyId");
       res.status(200).json(properties);
     } catch (error) {
       console.log(error);

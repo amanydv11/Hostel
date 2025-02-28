@@ -65,7 +65,7 @@ const App = () => {
 <Route path='/create_your_property' element={<HostelPostCard/>}/>
 <Route path='/properties/:propertyId' element={<PropertyDetails/>}/>
 <Route path='/properties/category/:category' element={<CategoryPage/>}/>
-<Route path='/:userId/trip' element={<Trip/>}/>
+<Route path='/:userId/trips' element={<Trip/>}/>
 <Route path='/:userId/properties' element={<PropertyList/>}/>
 <Route path='/:userId/reservation' element={<Reservation/>}/>
 

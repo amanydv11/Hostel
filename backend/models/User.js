@@ -43,7 +43,22 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpiresAt:Date,
     verificationToken:String,
     verificationTokenExpiresAt:Date,
-    
+    tripList: {
+        type: Array,
+        default: [],
+      },
+      wishList: {
+        type: Array,
+        default: [],
+      },
+      propertyList: {
+        type: Array,
+        default: [],
+      },
+      reservationList: {
+        type: Array,
+        default: [],
+      }
 },
  {timestamps:true}
 )

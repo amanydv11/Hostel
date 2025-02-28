@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -21,7 +19,6 @@ const PropertyDetails = () => {
         credentials: "include",
       });
       const data = await res.json();
-    
 
       setProperty({ ...data, photos: data.listingPhotoPaths });
       setLoading(false);
@@ -56,15 +53,28 @@ const PropertyDetails = () => {
 
   const handleSubmit = async () => {
     try {
+      if (!currentUser) {
+        navigate("/login");
+        return;
+      }
+      if (dateRange[0].startDate.getTime() === dateRange[0].endDate.getTime()) {
+        alert("Please select different dates for check-in and check-out");
+        return;
+      }
+const formatDate = (date)=>{
+  const d = new Date(date);
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+     
+}
       const bookingForm = {
         customerId,
         propertyId: property._id,
         hostId: property.creator._id,
-        startDate: dateRange[0].startDate.toDateString(),
-        endDate: dateRange[0].endDate.toDateString(),
+        startDate: formatDate(dateRange[0].startDate),
+        endDate: formatDate(dateRange[0].endDate),
         totalPrice: property.price * dayCount,
       };
-
+      console.log(bookingForm);
       const res = await fetch("/api/booking/create", {
         method: "POST",
         credentials: "include",
@@ -73,9 +83,13 @@ const PropertyDetails = () => {
         },
         body: JSON.stringify(bookingForm),
       });
+      const data = await res.json();
+      console.log(data);
 
       if (res.ok) {
         navigate(`/${customerId}/trips`);
+      } else {
+        throw new Error("Failed to book property");
       }
     } catch (error) {
       console.log("Error in booking property", error.message);
@@ -86,12 +100,10 @@ const PropertyDetails = () => {
     <Loader />
   ) : (
     <div className="px-4 sm:px-6 md:px-10 lg:px-20">
-      {/* Property Title & Host */}
       <div className="mt-4 flex flex-col md:flex-row justify-between items-start">
         <h1 className="text-3xl font-semibold">{property.title}</h1>
       </div>
 
-      {/* Property Images */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {property.photos?.map((photo, index) => (
           <img
@@ -103,9 +115,7 @@ const PropertyDetails = () => {
         ))}
       </div>
 
-      {/* Main Details */}
       <div className="mt-6 flex flex-col md:flex-row gap-10">
-        {/* Left Section */}
         <div className="flex-1">
           <h2 className="text-xl font-semibold">{property.type}</h2>
           <h2 className="text-lg font-semibold text-gray-700">
@@ -118,7 +128,6 @@ const PropertyDetails = () => {
 
           <hr className="mt-4" />
 
-          {/* Host Information */}
           <div className="flex items-center gap-4 mt-4">
             <img
               className="w-12 h-12 rounded-full object-cover"
@@ -136,14 +145,14 @@ const PropertyDetails = () => {
 
           <hr className="mt-4" />
 
-          {/* Description */}
           <h3 className="text-2xl font-semibold mt-4">Description</h3>
           <p className="mt-2 text-gray-700">{property.description}</p>
 
           <hr className="mt-4" />
 
-          {/* Amenities */}
-          <h3 className="text-2xl font-semibold mt-4">What this place offers</h3>
+          <h3 className="text-2xl font-semibold mt-4">
+            What this place offers
+          </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4 text-gray-600">
             {property.amenities[0].split(",").map((item, index) => {
               const facilityItem = facilities.find(
@@ -160,7 +169,6 @@ const PropertyDetails = () => {
 
           <hr className="mt-4" />
 
-          {/* Date Selection */}
           <h3 className="text-2xl font-semibold mt-4">
             Select your stay duration
           </h3>
@@ -170,7 +178,8 @@ const PropertyDetails = () => {
         </div>
         <div className="shadow-lg p-4 w-full md:w-96  md:h-[380px] sm:h-[300px] rounded-md mb-4">
           <div className="text-2xl font-semibold">
-            ₹ {property.price} <span className="text-gray-500 text-sm">/month</span>
+            ₹ {property.price}{" "}
+            <span className="text-gray-500 text-sm">/month</span>
           </div>
           <div className="mt-4 border rounded-lg p-4">
             <div className="flex justify-between mb-2">
@@ -189,9 +198,8 @@ const PropertyDetails = () => {
             </div>
           </div>
 
-        
           <button
-            className="bg-red-500 w-full mt-4 text-xl text-white py-2 rounded-md"
+            className="bg-red-500 w-full mt-4 text-xl text-white py-2 rounded-md cursor-pointer "
             type="submit"
             onClick={handleSubmit}
           >
@@ -201,26 +209,23 @@ const PropertyDetails = () => {
           <p className="text-sm text-gray-500 mt-2 text-center">
             You won’t be charged yet
           </p>
-   <div className='flex mt-5 items-center justify-between'>
- <div >
-            {
-                dayCount > 1 ?  
-                (
-                  <h2 className='ml-[10px] underline text text-black'>
-                    ₹{property.price} x {dayCount} days
-                  </h2>
-                 ):( 
-                    <h2 className='ml-[10px]'>
-                    ₹{property.price} x {dayCount} days
-                  </h2>
-                )
-              }
+          <div className="flex mt-5 items-center justify-between">
+            <div>
+              {dayCount > 1 ? (
+                <h2 className="ml-[10px] underline text text-black">
+                  ₹{property.price} x {dayCount} days
+                </h2>
+              ) : (
+                <h2 className="ml-[10px]">
+                  ₹{property.price} x {dayCount} days
+                </h2>
+              )}
             </div>
             <div>
               <p>₹ {property.price * dayCount}</p>
             </div>
-            </div>
-            <hr className="mt-5 text-gray-300"/>
+          </div>
+          <hr className="mt-5 text-gray-300" />
           <div className="flex justify-between mt-4 font-semibold">
             <p>Total before taxes</p>
             <p>₹ {property.price * dayCount}</p>

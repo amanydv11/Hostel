@@ -7,8 +7,8 @@ router.delete('/delete/:userId',verifyToken,deleteUser);
 router.post('/signout',signout)
 router.get('/getusers', verifyToken, getUsers);
 router.get('/:userId', getUser);
-router.patch('/:userId/:propertyId',verifyToken,addWishList);
+router.patch('/:userId/:propertyId',addWishList);
 router.get('/:userId/trips',verifyToken,getTripList);
 router.get('/:userId/properties',verifyToken,propertyList);
-router.get('/:userId/reservations',verifyToken,reservationList);
+router.get('/:userId/reservation',verifyToken,reservationList);
 export default router;

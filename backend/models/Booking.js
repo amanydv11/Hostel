@@ -16,15 +16,22 @@ const BookingSchema = new mongoose.Schema({
     startDate:{
         type:Date,
         required:true,
+        get: (date) => date.toISOString().split('T')[0]
     },
     endDate:{
         type:Date,
         required:true,
+        get: (date) => date.toISOString().split('T')[0]
     },
     totalPrice:{
         type:Number,
         required:true,
     },  
+    status:{
+        type:String,
+        enum:['pending','confirmed','cancelled'],
+        default:'pending',
+    },
 },
 {timestamps:true}
 )

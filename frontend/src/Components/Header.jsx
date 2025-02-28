@@ -13,7 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { Avatar } from "@mui/material";
 import { signoutSuccess } from "../redux/user/userSlice";
-import { resetProfile } from "../redux/profile/profileSlice";
+
 
 const Header = () => {
   const path = useLocation().pathname;
@@ -23,7 +23,7 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
-
+const user= currentUser
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
@@ -157,23 +157,30 @@ const Header = () => {
                   </MenuItem>
                   <Divider />
                   <MenuItem>
-                    <Link to="/:userId/wishlist">
+                    <Link to={`/${user._id}/wishlist`}>
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Wishlists
                       </button>
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/:userId/trip">
+                    <Link to={`/${user._id}/trips`}>
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Trip history
                       </button>
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/:userId/reservation">
+                    <Link to={`/${user._id}/reservation`}>
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Reservation List
+                      </button>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to={`/${user._id}/properties`}>
+                      <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
+                        My Listing
                       </button>
                     </Link>
                   </MenuItem>

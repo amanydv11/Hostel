@@ -40,9 +40,10 @@ const HostelCard = ({
   const dispatch = useDispatch();
 
   const {currentUser} = useSelector((state) => state.user);
-  const wishList = currentUser?.wishList || [];
+  const wishList = useSelector((state)=>state.user.currentUser?.wishList || []);
 
-  const isLiked = wishList?.find((item) => item?._id === propertyId);
+  const isLiked = Array.isArray(wishList) && wishList.find((item) => item?._id === propertyId);
+
 
   const patchWishList = async () => {
     if (currentUser?._id !== creator._id) {
@@ -50,7 +51,7 @@ const HostelCard = ({
       `api/user/${currentUser?._id}/${propertyId}`,
       {
         method: "PATCH",
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
       }
@@ -67,7 +68,7 @@ const HostelCard = ({
         navigate(`/properties/${propertyId}`);
       }}
     >
-      <div className="w-[300px] mb-[10px] border border-gray-300 overflow-hidden rounded-md">
+      <div className="w-full max-w-[300px] mb-[10px] border border-gray-300 overflow-hidden rounded-md relative">
         <div
           style={{ transform: `translateX(-${currentIndex * 300}px)`,display:"flex",transition:"transform 0.5s ease",width:`${listingPhotoPaths?.length * 100}%` }}
         >
@@ -119,28 +120,22 @@ const HostelCard = ({
             {startDate} - {endDate}
           </p>
           <p className="text-[14px] text-gray-600">
-            <span>${totalPrice}</span> total
+            <span>₹{totalPrice}</span>
           </p>
         </>
       )}
 
       <button
-        style={{
-          position:"absolute",
-          top:"20px",
-          right:"25px",
-          background:"none",
-          border:"none",
-          cursor:"pointer",
-          fontSize:"20px",
-          zIndex:"9999",
-         
-        }}
+         className="absolute top-[20px] right-[25px] z-[9999] cursor-pointer"
+         style={{
+           background: "none",
+           border: "none",
+           fontSize: "20px",
+         }}
         onClick={(e) => {
           e.stopPropagation();
           patchWishList();
         }}
-        disabled={!currentUser}
       >
         {isLiked ? (
           <Favorite sx={{ color: "red" }} />
