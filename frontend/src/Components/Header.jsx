@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
+import { Search, } from "@mui/icons-material";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useSelector, useDispatch } from "react-redux";
 import mylogo from "../assets/mylogo.png";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaUser } from "react-icons/fa";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { Avatar } from "@mui/material";
 import { signoutSuccess } from "../redux/user/userSlice";
@@ -20,17 +18,10 @@ const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const { theme } = useSelector((state) => state.theme);
   const { currentUser } = useSelector((state) => state.user);
 const user= currentUser
-  useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get("searchTerm");
-    if (searchTermFromUrl) {
-      setSearchTerm(searchTermFromUrl);
-    }
-  }, [location.search]);
 
   const handleSignout = async () => {
     try {
@@ -48,13 +39,6 @@ const user= currentUser
       console.log(error.message);
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set("searchTerm", searchTerm);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
-  };
 
   return (
     <div
@@ -66,34 +50,26 @@ const user= currentUser
             <img src={mylogo} alt="" className="h-20 cursor-pointer w-40 p-2" />
           </Link>
         </div>
-        <div className="hidden md:flex justify-center items-center">
-          <form onSubmit={handleSubmit}>
-            <Paper
-              component="form"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-                maxWidth: "400px",
-              }}
-            >
-              <InputBase
-                sx={{ ml: 1, flex: 1, width: "400px" }}
-                placeholder="Search in your location"
-                inputProps={{ "aria-label": "search google maps" }}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <IconButton sx={{ p: "10px" }} aria-label="directions">
-                <AddLocationIcon />
-              </IconButton>
-              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
-            </Paper>
-          </form>
+        <div style={{
+           border: '1px solid grey',
+           borderRadius:'30px',
+           height: '50px',
+           padding: '0px 20px',
+           gap: '40px',
+        }} className="hidden md:flex justify-center items-center">
+        <input
+        className="border-none outline-none"
+          type="text"
+          placeholder="Search ..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <IconButton disabled={search === ""}>
+          <Search
+           sx={{color:'red'}}
+            onClick={() => {navigate(`/properties/search/${search}`)}}
+          />
+        </IconButton>
         </div>
 
         <div className="flex items-center justify-end space-x-4">
@@ -171,7 +147,7 @@ const user= currentUser
                     </Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to={`/${user._id}/reservation`}>
+                    <Link to={`/${user._id}/reservations`}>
                       <button className="w-full text-left hover:bg-gray-100 cursor-pointer block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
                         Reservation List
                       </button>

@@ -152,7 +152,7 @@ try {
   export const propertyList = async (req,res)=>{
     try {
       const {userId} = req.params;
-      const properties = await Property.find({creator:userId}).populate("hostId propertyId");
+      const properties = await Property.find({creator:userId}).populate("creator");
       res.status(200).json(properties);
     } catch (error) {
       console.log(error);

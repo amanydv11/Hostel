@@ -10,5 +10,5 @@ router.get('/:userId', getUser);
 router.patch('/:userId/:propertyId',addWishList);
 router.get('/:userId/trips',verifyToken,getTripList);
 router.get('/:userId/properties',verifyToken,propertyList);
-router.get('/:userId/reservation',verifyToken,reservationList);
+router.get('/:userId/reservations',verifyToken,reservationList);
 export default router;

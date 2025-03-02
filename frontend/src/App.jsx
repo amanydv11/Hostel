@@ -32,6 +32,7 @@ import CategoryPage from './Pages/CategoryPage'
 import Trip from './Pages/Trip'
 import PropertyList from './Pages/PropertyList'
 import Reservation from './Pages/Reservation'
+import Search from './Components/Search '
 const App = () => {
   return (
     <>
@@ -67,8 +68,8 @@ const App = () => {
 <Route path='/properties/category/:category' element={<CategoryPage/>}/>
 <Route path='/:userId/trips' element={<Trip/>}/>
 <Route path='/:userId/properties' element={<PropertyList/>}/>
-<Route path='/:userId/reservation' element={<Reservation/>}/>
-
+<Route path='/:userId/reservations' element={<Reservation/>}/>
+<Route path='/properties/search/:search' element={<Search/>}/>
      </Routes>
      <Footer/>
      </BrowserRouter> 

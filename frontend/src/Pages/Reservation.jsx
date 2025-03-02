@@ -13,7 +13,7 @@ const Reservation = () => {
   const dispatch = useDispatch();
   const getReservationList = async () => {
     try {
-      const res = await fetch(`/api/user/${userId}/reservation`, {
+      const res = await fetch(`/api/user/${userId}/reservations`, {
         method: "GET",
       });
       const data = await res.json();
@@ -32,18 +32,18 @@ const Reservation = () => {
     <>
       <h1 className="text-2xl font-serif sm:text-xl md:text-3xl font-semibold px-4 my-4  text-center text-gray-500">Your Reservation</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 mb-5 sm:px-8 md:px-15 ">
-        {reservationList?.map((reservation) => (
+        {reservationList?.map((reservations) => (
           <HostelCard
-            propertyId={reservation.propertyId._id}
-            creator={reservation.hostId._id}
-            listingPhotoPaths={reservation.propertyId.listingPhotoPaths}
-            city={reservation.propertyId.city}
-            province={reservation.propertyId.province}
-            country={reservation.propertyId.country}
-            category={reservation.propertyId.category}
-            startDate={reservation.startDate}
-            endDate={reservation.endDate}
-            totalPrice={reservation.totalPrice}
+            propertyId={reservations.propertyId._id}
+            creator={reservations.hostId._id}
+            listingPhotoPaths={reservations.propertyId.listingPhotoPaths}
+            city={reservations.propertyId.city}
+            province={reservations.propertyId.province}
+            country={reservations.propertyId.country}
+            category={reservations.propertyId.category}
+            startDate={reservations.startDate}
+            endDate={reservations.endDate}
+            totalPrice={reservations.totalPrice}
             booking={true}
           />
         ))}
