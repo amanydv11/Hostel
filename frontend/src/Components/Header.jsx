@@ -41,9 +41,7 @@ const user= currentUser
   };
 
   return (
-    <div
-      className={`${location.pathname.includes("/host") ? " invisible" : ""}`}
-    >
+    <>
       <div className="flex  bg-white border-gray-300 border-b-2 justify-between items-center px-4">
         <div>
           <Link to="/">
@@ -243,7 +241,7 @@ const user= currentUser
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

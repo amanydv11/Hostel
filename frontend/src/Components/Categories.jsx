@@ -20,7 +20,7 @@ const Categories = () => {
             <div className="overlay"></div>
             <div className="category_text">
               <div className="category_text_icon"><category.icon size={30}/></div>
-              <p>{category.label}</p>
+              <p className=''>{category.label}</p>
             </div>
           </div>
         </Link>

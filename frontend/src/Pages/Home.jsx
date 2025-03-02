@@ -6,7 +6,7 @@ import Listings from '../Components/host/Listings';
 const Home = () => {
   return (
     <div className=''>
-      <div   >
+      <div>
         <Slide/>
         <Categories/>
         <Listings/>

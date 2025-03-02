@@ -114,22 +114,28 @@ export const searchRoom = async (req, res) => {
    if(search==="all"){
     properties=await Property.find({}).populate('creator')
    }else{
-    properties=await Property.find({
-      $or:[
-        {city:{$regex:search,$options:"i"}},
-        {province:{$regex:search,$options:"i"}},
-        {country:{$regex:search,$options:"i"}},
-        {amenities:{$regex:search,$options:"i"}},
-        {price:{$regex:search,$options:"i"}},
-        {bedroomCount:{$regex:search,$options:"i"}},
-        {bedCount:{$regex:search,$options:"i"}},
-        {bathroomCount:{$regex:search,$options:"i"}},
-        {guestCount:{$regex:search,$options:"i"}},
-        {creator:{$regex:search,$options:"i"}},
-        {category:{$regex:search,$options:"i"}},
-        {type:{$regex:search,$options:"i"}},
+    const searchRegex = new RegExp(search, 'i');
+      
+    properties = await Property.find({
+      $or: [
+        { city: searchRegex },
+        { province: searchRegex },
+        { country: searchRegex },
+        { amenities: searchRegex },
+        { category: searchRegex },
+        { type: searchRegex },
+       
+        {
+          $or: [
+            { price: !isNaN(search) ? Number(search) : null },
+            { bedroomCount: !isNaN(search) ? Number(search) : null },
+            { bedCount: !isNaN(search) ? Number(search) : null },
+            { bathroomCount: !isNaN(search) ? Number(search) : null },
+            { guestCount: !isNaN(search) ? Number(search) : null }
+          ]
+        }
       ]
-     }).populate('creator')
+    }).populate('creator');
    }
    res.status(200).json(properties)
   } catch (error) {

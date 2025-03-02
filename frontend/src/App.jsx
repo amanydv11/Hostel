@@ -62,6 +62,7 @@ const App = () => {
      <Route path='/account-setting/notification' element={<AccountNotification/>}/>
      <Route path='/forgot_pass' element={<ForgotPassword/>}/>
      <Route path='/reset/:token' element={<ResetPassword/>}/>
+     <Route path='/properties/search/:search' element={<Search/>}/>
 <Route path='*' element={<Notfound/>}/>
 <Route path='/create_your_property' element={<HostelPostCard/>}/>
 <Route path='/properties/:propertyId' element={<PropertyDetails/>}/>
@@ -69,7 +70,7 @@ const App = () => {
 <Route path='/:userId/trips' element={<Trip/>}/>
 <Route path='/:userId/properties' element={<PropertyList/>}/>
 <Route path='/:userId/reservations' element={<Reservation/>}/>
-<Route path='/properties/search/:search' element={<Search/>}/>
+
      </Routes>
      <Footer/>
      </BrowserRouter> 

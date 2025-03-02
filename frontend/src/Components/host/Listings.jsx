@@ -40,13 +40,16 @@ try {
     <div>
       <div style={{display:"flex",gap:"60px", flexWrap:"wrap",justifyContent:"center",padding:"50px 80px"}} >
         {categories?.map((category,index) => (
-            <div style={{
-              cursor: 'pointer', transition: '0.2s ease',
-              backgroundColor: category.label === selectedCategory ? 'lightgray' : 'white'
-             }} key={index} className={`flex flex-col items-center cursor-pointer hover:bg-gray-100 rounded-md p-2 ${category.label === selectedCategory ? "selected" : ""}`}
+            <div key={index} className={`flex flex-col items-center cursor-pointer hover:opacity-70 rounded-md p-2 transition-all duration-200`}
             onClick={() => setSelectedCategory(category.label)} >
-                <div className="text-2xl"><category.icon size={20} /></div>
-                <p className='text-[18px] font-semibold'>{category.label}</p>
+                <div className={`text-2xl ${category.label === selectedCategory ? 'text-red-500' : 'text-gray-600'}`}><category.icon size={20} /></div>
+                <p className={`text-[18px] font-semibold ${
+              category.label === selectedCategory 
+                ? 'text-red-500' 
+                : 'text-gray-600'
+            }`}>
+              {category.label}
+            </p>
                
             </div>
         ))}

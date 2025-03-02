@@ -36,7 +36,7 @@ try {
     <Loader/>
   ) : (
     <>
-    <h1 className='text-2xl font-serif sm:text-xl md:text-3xl font-semibold px-4 my-4  text-center text-gray-500'>{category} listings</h1>
+    <h1 className='text-2xl font-serif sm:text-xl md:text-3xl font-semibold px-4 my-4  text-center text-gray-500'>{category} </h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 mb-5 sm:px-8 md:px-15  ">
           {properties.map((
 {
