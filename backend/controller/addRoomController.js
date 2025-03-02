@@ -143,3 +143,42 @@ export const searchRoom = async (req, res) => {
     console.log(error);
 }
 }
+export const removeRoom = async(req,res)=>{
+  try {
+    const { propertyId } = req.params;
+    const { userId } = req.body;
+    const property = await Property.findById(propertyId).populate('creator');
+    if (!property) {
+        return res.status(404).json({
+            success: false,
+            message: "Property not found"
+        });
+    }
+    if (property.creator._id.toString() !== userId && !req.user.isAdmin) {
+        return res.status(403).json({
+            success: false,
+            message: "Not authorized to delete this property"
+        });
+    }
+    await Booking.deleteMany({ propertyId });
+    for (const photoUrl of property.listingPhotoPaths) {
+        const publicId = photoUrl.split('/').pop().split('.')[0];
+        await cloudinary.uploader.destroy(publicId);
+    }
+    await Property.findByIdAndDelete(propertyId);
+
+    res.status(200).json({
+        success: true,
+        message: "Property and related data deleted successfully"
+    });
+
+} catch (error) {
+    console.error("Error in removing property:", error);
+    res.status(500).json({
+        success: false,
+        message: "Failed to delete property",
+        error: error.message
+    });
+}
+
+}

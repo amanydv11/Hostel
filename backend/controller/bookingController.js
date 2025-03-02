@@ -38,3 +38,48 @@ export const createBooking = async (req,res)=>{
         res.status(400).json({ success:false, message: "Fail to create a new Booking!", error: error.message })
     }
 }
+
+export const cancelBooking = async(req,res)=>{
+    try {
+        const { bookingId } = req.params;
+        const booking = await Booking.findById(bookingId);
+        if (!booking) {
+            return res.status(404).json({
+                success: false,
+                message: "Booking not found"
+            });
+        }
+        if (booking.customerId.toString() !== req.user.id && 
+            booking.hostId.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "You are not authorized to cancel this booking"
+            });
+        }
+        if (booking.status === 'cancelled') {
+            return res.status(400).json({
+                success: false,
+                message: "Booking is already cancelled"
+            });
+        }
+        booking.status = 'cancelled';
+        booking.cancelledAt = new Date();
+        booking.cancelledBy = req.user.id;
+
+        await booking.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Booking cancelled successfully",
+            booking: booking
+        });
+
+    } catch (error) {
+        console.error("Error in cancelling booking:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to cancel booking",
+            error: error.message
+        });
+    }
+}
